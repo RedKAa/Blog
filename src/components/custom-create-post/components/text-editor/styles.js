@@ -67,5 +67,14 @@ export const ReactQuillWrapper = styled(ReactQuill)`
     .ql-editor.ql-blank {
       padding: 0px;
     }
+    .quill-editor iframe {
+      pointer-events: none;
+    }
+    .ql-editor .ql-video {
+      display: block;
+      max-width: 100%;
+      width: 1200px;
+      height: 700px;
+    }
   }
 `;

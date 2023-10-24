@@ -12,17 +12,17 @@ export default function useBlogs(pageNumber) {
     getBlogs(pageNumber)
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
-        let { _metadata, records } = res.data;
+        let { total,current,pageSize, data } = res.data;
 
         setPosts((prevBlogs) => {
-          return [...prevBlogs, ...records];
+          return [...prevBlogs, ...data];
         });
 
-        const lastPage = Math.ceil(_metadata.total_count / _metadata.per_page);
+        const lastPage = Math.ceil(total / pageSize);
 
-        console.log("page : ", _metadata.page, "| lastpage : ", lastPage);
+        console.log("page : ", current, "| lastpage : ", lastPage);
 
-        setHasMore(_metadata.page < lastPage);
+        setHasMore(current < lastPage);
         setLoading(false);
       })
       .catch((e) => {

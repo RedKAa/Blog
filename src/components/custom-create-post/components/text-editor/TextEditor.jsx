@@ -1,5 +1,12 @@
 import { useAtom } from "jotai";
 import { contentFieldAtom } from "../../store/content-field";
+import ReactQuill, { Quill } from 'react-quill';
+import ImageResize from 'quill-image-resize-module-react';
+// import VideoResize from 'quill-video-resize-module';
+
+Quill.register('modules/imageResize', ImageResize);
+// Quill.register('modules/VideoResize', VideoResize);
+
 import * as S from "./styles";
 
 const modules = {
@@ -18,6 +25,13 @@ const modules = {
     ["link", "image", "video"],
     ["clean"],
   ],
+  imageResize: {
+    parchment: Quill.import('parchment'),
+    modules: ['Resize', 'DisplaySize'],
+  },
+  // VideoResize: {
+  //   modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+  // }
 };
 
 const formats = [

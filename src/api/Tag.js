@@ -9,7 +9,7 @@ export async function getTags(filters) {
       method: "GET",
       params: { ...filters },
     });
-    return res;
+    return res.data;
   } catch (e) {
     return e;
   }

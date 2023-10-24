@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
 import {
+  Alert,
+  Button,
   Form,
   Input,
-  Upload,
-  Select,
-  Button,
-  Typography,
   Space,
   Spin,
-  Alert,
+  Typography
 } from "antd";
 import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
+import { getTags } from "../../api/Tag";
 import Container from "../../components/utils/Container";
+import ButtonConfirm from "./components/button-confirm/ButtonConfirm";
 import TextEditor from "./components/text-editor/TextEditor";
 import { contentFieldAtom } from "./store/content-field";
-import { getTags } from "../../api/Tag";
-import ButtonConfirm from "./components/button-confirm/ButtonConfirm";
 import * as S from "./styles";
+import { upload } from "../../api/FileUpload";
 
 const { Text } = Typography;
 const { TextArea } = Input;
@@ -64,27 +63,25 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
   }, [post?.cover]);
 
   useEffect(() => {
-    getTags({ paginate: "false" }).then((res) => {
+    getTags().then((res) => {
       setTags(() => formatSelectOptions(res.data));
     });
   }, []);
 
   const onFinish = (values) => {
     setStatus("pending");
-
     const formData = new FormData();
     formData.append("title", values.title);
     formData.append("content", contentField);
-    if (fileList[0]) {
-      formData.append("cover", fileList[0].originFileObj);
-    }
-    if (values.tags) {
-      values.tags.forEach((tag, index) => {
-        formData.append(`tags[${index}]`, tag);
+    formData.append("tags", values.tags);
+    if(fileList[0]) {
+      upload(fileList[0].originFileObj).then((res) => {
+        formData.append("cover", res.data);
+        handleFetch(formData, resetFields);
       });
+    } else {
+      handleFetch(formData, resetFields);
     }
-
-    handleFetch(formData, resetFields);
   };
 
   const normFile = (e) => {
@@ -150,7 +147,7 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
         {status === "resolved" && (
           <Alert
             message={
-              post ? "Post updated with Success" : "Post Added with Success"
+              post ? "Post updated with Success" : "Post Submitted with Success"
             }
             type="success"
             closable
@@ -187,12 +184,25 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
                   {post?.cover ? "change " : "add a "}cover image
                 </S.Upload>
               </S.Item>
-              <S.Item
+                <S.Item
                 name="title"
                 style={{ minHeight: "62px", maxHeight: "62px" }}
               >
                 <S.TextArea placeholder="New post title here..."></S.TextArea>
               </S.Item>
+
+
+              <S.Item name="type">
+                <S.Select
+                  allowClear
+                  options={[{ value: 'blog', label: 'blog' }, { value: 'video', label: 'video' }]}
+                  optionFilterProp="label"
+                  placeholder="Select post type...  "
+                  bordered={false}
+                />
+              </S.Item>
+              <br />
+
               <S.Item name="tags">
                 <S.Select
                   mode="multiple"
@@ -215,7 +225,7 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
               htmlType="submit"
               disabled={status === "pending"}
             >
-              Publish
+              Submit
             </Button>
           </S.FormFooter>
         </Form>
