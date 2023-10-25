@@ -21,7 +21,7 @@ function Profile() {
     getUserByUsername(username)
       .then((res) => {
         if (res.status === 200) {
-          setUser(res.data);
+          setUser(res.data[0]);
           setStatus("resolved");
         }
 

@@ -1,6 +1,23 @@
 import axios from "axios";
+import request from '../utils/requestServer';
 
 const URL = import.meta.env.VITE_URL;
+
+export async function getCurrentUser(options) {
+  return request('/users/current', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
+export const getUserByUsername = (name) => {
+  return request.get('/users', {
+    params: {
+      'UserName': name
+    },
+    useCache: true,
+  });
+};
 
 export async function getUsers(p, filters) {
   try {
@@ -27,14 +44,14 @@ export async function getUser(id) {
   }
 }
 
-export async function getUserByUsername(username) {
-  try {
-    const res = await axios.get(`${URL}/users/user/${username}`);
-    return res;
-  } catch (e) {
-    return e;
-  }
-}
+// export async function getUserByUsername(username) {
+//   try {
+//     const res = await axios.get(`${URL}/users/user/${username}`);
+//     return res;
+//   } catch (e) {
+//     return e;
+//   }
+// }
 
 export async function removeUser(id) {
   try {

@@ -30,11 +30,11 @@ const WarningAuthMessage = ({ isModalOpenState }) => {
             Login in
           </Button>
         </Link>
-        <Link to="/register">
+        {/* <Link to="/register">
           <Button type="link" size="large" block>
             Create account
           </Button>
-        </Link>
+        </Link> */}
       </ModalActions>
     </Modal>
   );

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme } from "./themes/light";
@@ -25,40 +25,58 @@ import EditPost from "./pages/edit-post";
 import ReadingList from "./pages/reading-list";
 import ForgotPassword from "./pages/forgot-password";
 import ResetPassword from "./pages/reset-password";
+import ProtectedRoute  from "./components/Routers/ProtectedRoute";
+import { getAppToken, getUserInfo } from "./utils/utils";
 
 function App() {
   const mode = useDarkModeStore((state) => state.mode);
+
+  // const user = getUserInfo();
+  // const appToken = getAppToken();
+
+  // console.log(JSON.stringify(user));
+  // console.log(JSON.stringify(appToken));
+
+  const user = {name: "Hoang"}
+
+
   return (
     <ThemeProvider theme={mode === "LIGHT" ? lightTheme : DarkTheme}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/:username/:slug" element={<Blog />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route element={<ProtectedRoute isAllowed={!!user} />}>
+            <Route index element={<Home />} />
+            <Route path="/:username/:slug" element={<Blog />} />
+            <Route path="/contact" element={<Contact />} />
 
-          <Route path=":username" element={<Profile />} />
+            <Route path=":username" element={<Profile />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/settings" element={<Settings />}>
-            <Route index element={<Navigate to="profile" />} />
-            <Route path="profile" element={<ProfileSetting />} />
-            <Route path="account" element={<AccountSetting />}></Route>
-            <Route
-              path="customization"
-              element={<CustomizationSetting />}
-            ></Route>
+            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/settings" element={<Settings />}>
+              <Route index element={<Navigate to="profile" />} />
+              <Route path="profile" element={<ProfileSetting />} />
+              <Route path="account" element={<AccountSetting />}></Route>
+              <Route
+                path="customization"
+                element={<CustomizationSetting />}
+              ></Route>
+            </Route>
+            <Route path="tags" element={<Tags />} />
+            <Route path="t/:tagId" element={<Tag />} />
+            <Route path="search" element={<Search />} />
+            <Route path="readinglist" element={<ReadingList />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="reset-password" element={<ResetPassword />} />
+
           </Route>
-          <Route path="tags" element={<Tags />} />
-          <Route path="t/:tagId" element={<Tag />} />
-          <Route path="search" element={<Search />} />
-          <Route path="readinglist" element={<ReadingList />} />
-          <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="*" element={<ErrorPage />} />
         </Route>
-        <Route path="/:username/:slug/edit" element={<EditPost />} />
-        <Route path="/new" element={<CreatePost />} />
+
+        <Route element={<ProtectedRoute isAllowed={!!user} />}>
+          <Route path="/:username/:slug/edit" element={<EditPost />} />
+          <Route path="/new" element={<CreatePost />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </ThemeProvider>
   );

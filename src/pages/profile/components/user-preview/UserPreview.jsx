@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 const UserPreview = ({ user }) => {
   const authUser = useUserStore((state) => state.user);
 
+  console.log(JSON.stringify(user));
+
   return (
     <S.ProfileHeader>
       <S.HeaderTop>
@@ -27,7 +29,7 @@ const UserPreview = ({ user }) => {
       </S.HeaderTop>
       <S.HeaderDetails>
         <S.Title level={2}>
-          {user.firstName} {user.lastName}
+          {user.userName}
         </S.Title>
         <S.Bio>{user.intro}</S.Bio>
         <S.Date>

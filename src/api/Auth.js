@@ -11,6 +11,10 @@ export const login = async (data) => {
   }
 };
 
+export const loginfirebase = async (data) => {
+  return await axios.post(`${URL}/login/firebase`,data);
+};
+
 export const register = async (data) => {
   try {
     const res = await axios.post(`${URL}/auth/register`, data);
