@@ -5,7 +5,13 @@ export const setLocalStorage = (name, value) => {
 };
 // localStorage user
 export const setUserInfo = (userInfo) => setLocalStorage('USER_INFO', JSON.stringify(userInfo));
-export const getUserInfo = () => getLocalStorage('USER_INFO');
+export const getUserInfo = () => {
+  try {
+    return JSON.parse(getLocalStorage('USER_INFO'))
+  } catch (error) {
+    return {}
+  }
+}
 export const removeUserInfo = () => localStorage.removeItem('USER_INFO');
 // localStorage token
 export const removeAppToken = (token) => localStorage.removeItem('APP_TOKEN');

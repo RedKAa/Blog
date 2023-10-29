@@ -9,22 +9,22 @@ export default function useBlogs(pageNumber, authorId) {
   useEffect(() => {
     setLoading(true);
     setError(false);
-    getBlogs(pageNumber, { author: authorId })
+    getBlogs(pageNumber, { AuthorId: authorId })
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
-        let { _metadata, records } = res.data;
+        let { total, pageSize, current, data } = res.data;
 
         setPosts((prevBlogs) => {
           return [
             ...new Map(
-              [...prevBlogs, ...records].map((blog) => [blog["id"], blog])
+              [...prevBlogs, ...data].map((blog) => [blog["id"], blog])
             ).values(),
           ];
         });
 
-        const lastPage = Math.ceil(_metadata.total_count / _metadata.per_page);
+        const lastPage = Math.ceil(total / pageSize);
 
-        setHasMore(_metadata.page < lastPage);
+        setHasMore(current < lastPage);
         setLoading(false);
       })
       .catch((e) => {

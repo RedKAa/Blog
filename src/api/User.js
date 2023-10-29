@@ -19,6 +19,14 @@ export const getUserByUsername = (name) => {
   });
 };
 
+export const getUserById = (id) => {
+  console.log('getUserById');
+  return request.get('/users', {
+    params: {
+      'id': id,
+    }
+  });
+};
 export async function getUsers(p, filters) {
   try {
     const response = await axios({

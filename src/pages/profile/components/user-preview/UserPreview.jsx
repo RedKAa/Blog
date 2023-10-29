@@ -4,11 +4,14 @@ import { useUserStore } from "../../../../store/user";
 
 import * as S from "./styles";
 import { Link } from "react-router-dom";
+import { getUserInfo } from "../../../../utils/utils";
 
 const UserPreview = ({ user }) => {
-  const authUser = useUserStore((state) => state.user);
+  const authUser = getUserInfo();
 
-  console.log(JSON.stringify(user));
+  console.log('auth',authUser);
+  console.log('user',user);
+
 
   return (
     <S.ProfileHeader>

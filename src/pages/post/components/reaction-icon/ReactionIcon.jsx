@@ -16,48 +16,49 @@ const ReactionIcon = ({ postId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const authUser = useUserStore((state) => state.user);
 
-  useEffect(() => {
-    if (Object.keys(authUser).length !== 0) {
-      checkReacted(postId)
-        .then((res) => {
-          if (res?.status === 200) {
-            setReactionActive(res.data?.reacted);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-  }, [postId]);
+  // useEffect(() => {
+  //   if (Object.keys(authUser).length !== 0) {
+  //     checkReacted(postId)
+  //       .then((res) => {
+  //         if (res?.status === 200) {
+  //           setReactionActive(res.data?.reacted);
+  //         }
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   }
+  // }, [postId]);
 
-  useEffect(() => {
-    nbrReactionsByPost(postId)
-      .then((res) => {
-        if (res.status === 200) {
-          setNbrReactions(res.data);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [reactionActive, postId]);
+  // useEffect(() => {
+  //   nbrReactionsByPost(postId)
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setNbrReactions(res.data);
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, [reactionActive, postId]);
 
   const handleToggleReaction = () => {
     if (Object.keys(authUser).length === 0) {
       console.log("not auth");
       setIsModalOpen(true);
     } else {
-      toggleReaction({
-        postId,
-      })
-        .then((res) => {
-          if (res.status === 201) {
-            setReactionActive((prevReactionActive) => !prevReactionActive);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      // toggleReaction({
+      //   postId,
+      // })
+      //   .then((res) => {
+      //     if (res.status === 201) {
+      //       setReactionActive((prevReactionActive) => !prevReactionActive);
+      //     }
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //   });
+        console.log('react');
     }
   };
   return (

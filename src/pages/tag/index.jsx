@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import PostsList from "./components/PostsList";
 import { useEffect, useState } from "react";
 import { getTag } from "../../api/Tag";
-import { nbrPostsByTag } from "../../api/Blog";
+import { allBlogByTag } from "../../api/Blog";
 import * as S from "./styles";
 
 function Tag() {
@@ -22,9 +22,9 @@ function Tag() {
         console.log(e);
       });
 
-    nbrPostsByTag(tagId)
+      allBlogByTag(tagId)
       .then((res) => {
-        setNbrPosts(res.data.nbrPosts);
+        setNbrPosts(res?.data?.total);
       })
       .catch((e) => {
         console.log(e);

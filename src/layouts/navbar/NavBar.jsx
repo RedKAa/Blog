@@ -15,6 +15,7 @@ import { useLogout } from "../../hooks/useLogout";
 import Container from "../../components/utils/Container";
 import { useUserStore } from "../../store/user";
 import { pageNumberAtom } from "../../pages/search/store/page-number";
+import { getUserInfo, logOut } from "../../utils/utils";
 
 let rightItems = [
   {
@@ -35,12 +36,10 @@ function NavBar() {
   const [_, setPageNumber] = useAtom(pageNumberAtom);
   const navigate = useNavigate();
 
-  const authUser = useUserStore((state) => state.user);
-
-  const { logout } = useLogout();
+  const authUser = getUserInfo();
 
   useEffect(() => {
-    if (Object.keys(authUser).length !== 0) {
+    if (authUser) {
       setAuthMenu([
         {
           key: "auth1",
@@ -86,7 +85,7 @@ function NavBar() {
               label: (
                 <span
                   onClick={() => {
-                    logout();
+                    logOut();
                     navigate("/login");
                   }}
                   style={{ color: "inherit" }}

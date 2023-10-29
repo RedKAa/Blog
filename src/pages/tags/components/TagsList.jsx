@@ -35,6 +35,7 @@ const TagsList = ({ q, pageNumberState }) => {
     },
     [loading, hasMore]
   );
+  console.log('tag:',tags);
   return (
     <StyledTagList>
       {tags.map((tag, index) => {

@@ -151,13 +151,13 @@ const SaveButton = styled.button`
 `;
 
 const PreviewPost = React.forwardRef(({ post }, ref) => {
-  const { id, title, slug, createdAt, author, tags } = post;
+  const { id, title, author, tags } = post; //slug, createdAt
   return (
     <PreviewContainer ref={ref}>
       <article>
         <PreviewTop>
           <PreviewImg
-            src={`${import.meta.env.VITE_URL}/${author.img}`}
+            src={`${import.meta.env.VITE_URL}/${author.avatarLink}`}
             alt="said"
             width="34"
             height="34"
@@ -165,19 +165,21 @@ const PreviewPost = React.forwardRef(({ post }, ref) => {
           <div>
             <PreviewTopTitleLink>
               <Title level={5}>
-                {author.firstName} {author.lastName}
+                {author.userName}
               </Title>
             </PreviewTopTitleLink>
-            <PreviewTopDate>
+            {/* <PreviewTopDate>
               <time dateTime={createdAt}>
                 {format(new Date(createdAt), "MMM d, y")}
               </time>
-            </PreviewTopDate>
+            </PreviewTopDate> */}
           </div>
         </PreviewTop>
         <PreviewBody>
           <PreviewTitle level={3}>
-            <Link to={`/${author.username}/${slug}`}>{title} </Link>
+            {/* <Link to={`/${author.username}/${slug}`}>{title} </Link> */}
+            <Link to={`/post/${id}`}>{title} </Link>
+
           </PreviewTitle>
 
           <PreviewTags>
@@ -192,11 +194,11 @@ const PreviewPost = React.forwardRef(({ post }, ref) => {
             <PreviewReactions>
               <Reaction>
                 <HeartOutlined style={{ marginRight: "8px" }} />
-                <ReactionText>{post._count?.reactions} reactions</ReactionText>
+                <ReactionText>{post.reactions?.length || 0} reactions</ReactionText>
               </Reaction>
               <Reaction>
                 <MessageOutlined style={{ marginRight: "8px" }} />
-                <ReactionText> {post._count?.comments} comments</ReactionText>
+                <ReactionText> {post.comments?.length || 0} comments</ReactionText>
               </Reaction>
             </PreviewReactions>
             <PreviewSave>

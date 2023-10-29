@@ -6,16 +6,26 @@ import * as S from "./styles";
 const SideBar = () => {
   const [user] = useAtom(userAtom);
 
+  let totalposts = 0;
+  let totalcomments = 0;
+
+  if(user.posts) {
+    totalposts = user.posts.length;
+  }
+  if(user.comments) {
+    totalcomments = user.comments.length;
+  }
+
   return (
     <S.Sidebar>
       <S.Card>
         <S.Item>
           <FileTextOutlined />
-          <S.Text>{user._count?.posts} posts published</S.Text>
+          <S.Text>{totalposts} posts published</S.Text>
         </S.Item>
         <S.Item>
           <MessageOutlined />
-          <S.Text>{user._count?.comments} comments written</S.Text>
+          <S.Text>{totalcomments} comments written</S.Text>
         </S.Item>
       </S.Card>
     </S.Sidebar>

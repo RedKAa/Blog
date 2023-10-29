@@ -1,12 +1,16 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { getUserInfo } from "../../utils/utils";
 
 function ProtectedRoute ({
-   isAllowed,
-   redirectPath = '/login',
-   children,
+    acceptedRoles,
+    children,
  })  {
-   if (!isAllowed) {
-     return <Navigate to={redirectPath} replace />;
+  const authUser = getUserInfo();
+  const role = authUser?.role;
+
+  const location = useLocation();
+   if (!authUser || !acceptedRoles.includes(role)) {
+     return <Navigate to="/login" replace state={{ redirectTo: location }} />;
    }
    return children ? children : <Outlet />;
  };

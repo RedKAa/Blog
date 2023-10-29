@@ -12,7 +12,7 @@ export default function useBlogs(pageNumber) {
     getBlogs(pageNumber)
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
-        let { total,current,pageSize, data } = res.data;
+        let { total,current,pageSize, data } = res;
 
         setPosts((prevBlogs) => {
           return [...prevBlogs, ...data];

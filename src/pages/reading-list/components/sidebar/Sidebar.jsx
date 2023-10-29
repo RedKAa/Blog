@@ -8,17 +8,17 @@ const Sidebar = ({ userId }) => {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
   const [filter, setFilter] = useAtom(filterAtom);
-  useEffect(() => {
-    getAllTagsOfSaves()
-      .then((res) => {
-        if (res.status === 200) {
-          setTags(res.data);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [userId]);
+  // useEffect(() => {
+  //   getAllTagsOfSaves()
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setTags(res.data);
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, [userId]);
 
   const handleClickTag = (tagId) => {
     setFilter((prevFilter) => ({ ...prevFilter, tagId: tagId }));

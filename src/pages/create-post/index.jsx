@@ -12,26 +12,15 @@ export function formatSelectOptions(arr) {
   });
   return options;
 }
-
 const CreatePost = () => {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
 
   const handleFetch = (formData, resetFields) => {
+    console.log("handleFetch",formData);
     createBlog(formData)
       .then((res) => {
-        if (res.status === 201) {
-          resetFields();
-          setStatus("resolved");
-        }
-
-        if (res.response?.status === 400) {
-          throw res.response.data.message;
-        }
-      })
-      .catch((e) => {
-        setError(e);
-        setStatus("rejected");
+        resetFields();
       });
   };
 

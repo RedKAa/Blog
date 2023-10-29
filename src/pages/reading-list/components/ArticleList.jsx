@@ -10,35 +10,36 @@ const ArticleList = ({ userId, tagId, query }) => {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
   const [_, setTotalSaves] = useAtom(totalSavesAtom);
-  useEffect(() => {
-    getAllSavePosts(tagId, query)
-      .then((res) => {
-        if (res.status === 200) {
-          setPosts(res.data);
-          setTotalSaves(res.data.length);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [userId, tagId, query]);
+  // useEffect(() => {
+  //   getAllSavePosts(tagId, query)
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setPosts(res.data);
+  //         setTotalSaves(res.data.length);
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, [userId, tagId, query]);
 
   const onDeleteSave = (saveId) => {
-    removeSave(saveId)
-      .then((res) => {
-        if (res.status === 200) {
-          setPosts((prevPosts) => {
-            return prevPosts.filter((post) => post.saveId !== saveId);
-          });
-        }
+    // removeSave(saveId)
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       setPosts((prevPosts) => {
+    //         return prevPosts.filter((post) => post.saveId !== saveId);
+    //       });
+    //     }
 
-        if (res.response?.status === 400) {
-          throw res.response?.data?.message;
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    //     if (res.response?.status === 400) {
+    //       throw res.response?.data?.message;
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
+    console.log('delete ',saveId);
   };
   return (
     <StyledArticleList>

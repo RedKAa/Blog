@@ -1,29 +1,21 @@
-import { useState } from "react";
-import { login, loginfirebase } from "../../api/Auth";
-import { Link } from "react-router-dom";
 import {
-  Form,
-  Input,
   Button,
   Card,
-  Row,
   Col,
-  Alert,
-  Space,
-  Spin,
-  Typography,
-  message,
+  Row,
+  Typography
 } from "antd";
-import { useNavigate } from "react-router-dom";
-import Container from "../../components/utils/Container";
-import { useUserStore } from "../../store/user";
-import "./login.css";
-import { useDarkModeStore } from "../../store/dark-mode";
-import { loginGoogle } from '../../utils/authFirebase';
-import { setAppToken, setUserInfo } from '../../utils/utils';
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { loginfirebase } from "../../api/Auth";
 import { getCurrentUser } from "../../api/User";
+import Container from "../../components/utils/Container";
+import { useDarkModeStore } from "../../store/dark-mode";
+import { useUserStore } from "../../store/user";
+import { loginGoogle } from '../../utils/authFirebase';
+import { getUserInfo, setAppToken, setUserInfo } from '../../utils/utils';
+import "./login.css";
 const { Title, Paragraph } = Typography;
-// import { history } from 'umi';
 
 
 function Login() {
@@ -31,32 +23,8 @@ function Login() {
   const authUser = useUserStore((state) => state.user);
   const setMode = useDarkModeStore((state) => state.setMode);
 
-  const [status, setStatus] = useState("idle");
-  const [error, setError] = useState(null);
-  const [errorLoginFirebase, setErrorLoginFirebase] = useState({});
   const navigate = useNavigate();
-
-
-  // const onFinish = (values) => {
-  //   setStatus("pending");
-  //   login(values)
-  //     .then((res) => {
-  //       // 201 : created
-  //       if (res.status === 201) {
-  //         localStorage.setItem("current_user", JSON.stringify(res.data));
-  //         setUser(res.data);
-  //         setMode(res.data.mode);
-  //         navigate("/" + res.data.username);
-  //       }
-
-  //       throw new Error("password and email incorrect");
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //       setError(e);
-  //       setStatus("rejected");
-  //     });
-  // };
+  const { state: locationState } = useLocation();
 
   const handleLoginGoogle = async () => {
     try {
@@ -68,11 +36,14 @@ function Login() {
           const user = await getCurrentUser();
           if(user) {
             setUserInfo(user);
-            navigate("/"+user.userName);
-            // if (!history) return;
-            // const { query } = history.location;
-            // const { redirect } = query;
-            // history.push(redirect || '/');
+            let loguser = getUserInfo();
+            console.log('get user',loguser);
+            if (locationState) {
+              const { redirectTo } = locationState;
+              navigate(`${redirectTo.pathname}${redirectTo.search}`);
+            } else {
+              navigate("/");
+            }
           }
           return;
         }
@@ -87,21 +58,6 @@ function Login() {
       <Container>
         <Row justify="center">
           <Col md={14}>
-            {/* {status === "pending" && (
-              <Space
-                style={{
-                  width: "100%",
-                  justifyContent: "center",
-                  marginBottom: "16px",
-                }}
-              >
-                <Spin />
-              </Space>
-            )} */}
-
-            {/* {status === "rejected" && (
-              <Alert message={error.toString()} type="error" showIcon />
-            )} */}
             <Card className="login__card">
               <Title className="login__title">
                 Welcome to FPTBlog Community
@@ -116,9 +72,9 @@ function Login() {
               >
                 Login
               </Paragraph>
-               <Button block type="primary" onClick={handleLoginGoogle}>
-                  Login by FPTU google account
-                </Button>
+              <Button block type="primary" onClick={handleLoginGoogle}>
+                Login by FPTU google account
+              </Button>
             </Card>
           </Col>
         </Row>

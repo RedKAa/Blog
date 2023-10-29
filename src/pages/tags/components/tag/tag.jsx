@@ -11,7 +11,16 @@ const tag = forwardRef(({ tag }, ref) => {
           {tag.name}
         </S.Title>
       </S.TitleLink>
-      <S.Paragraph>{tag._count.posts} post</S.Paragraph>
+      <S.TitleLink to={`/subject/${tag.subjectId}`}>
+        <S.Title level={1}>
+          <S.Prefix>- </S.Prefix>
+          {tag.subject.name}
+
+          {tag.subject.status === 'Disable' ? ' - not active at FPTU' : ''}
+
+        </S.Title>
+      </S.TitleLink>
+      {/* <S.Paragraph>{tag._count.posts} post</S.Paragraph> */}
     </S.Tag>
   );
 });

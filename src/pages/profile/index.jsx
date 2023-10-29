@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAtom } from "jotai";
-
-import { getUserByUsername } from "../../api/User";
-
+import { getUserById, getUserByUsername } from "../../api/User";
 import { userAtom } from "./atom/user";
 import Container from "../../components/utils/Container";
 import UserPreview from "./components/user-preview/UserPreview";
@@ -12,28 +10,23 @@ import ArticlesList from "./components/ArticlesList";
 import styled from "styled-components";
 
 function Profile() {
-  const { username } = useParams();
-  const [user, setUser] = useAtom(userAtom);
-  const [status, setStatus] = useState("idle");
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    setStatus("pending");
-    getUserByUsername(username)
-      .then((res) => {
-        if (res.status === 200) {
-          setUser(res.data[0]);
-          setStatus("resolved");
-        }
 
-        if (res.response?.status === 400) {
-          throw res.response.data.message;
+  const { userid } = useParams();
+  const [user, setUser] = useAtom(userAtom);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getUserById(userid)
+      .then((res) => {
+        if(res.data[0]){
+          setUser(res.data[0]);
         }
       })
       .catch((e) => {
         setError(e);
-        setStatus("rejected");
       });
-  }, [username]);
+
+  }, [userid]);
 
   return (
     <Container>

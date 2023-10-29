@@ -26,30 +26,21 @@ import ReadingList from "./pages/reading-list";
 import ForgotPassword from "./pages/forgot-password";
 import ResetPassword from "./pages/reset-password";
 import ProtectedRoute  from "./components/Routers/ProtectedRoute";
-import { getAppToken, getUserInfo } from "./utils/utils";
 
 function App() {
   const mode = useDarkModeStore((state) => state.mode);
-
-  // const user = getUserInfo();
-  // const appToken = getAppToken();
-
-  // console.log(JSON.stringify(user));
-  // console.log(JSON.stringify(appToken));
-
-  const user = {name: "Hoang"}
-
-
   return (
     <ThemeProvider theme={mode === "LIGHT" ? lightTheme : DarkTheme}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route element={<ProtectedRoute isAllowed={!!user} />}>
+          <Route element={<ProtectedRoute acceptedRoles={['Student','Teacher']} />}>
             <Route index element={<Home />} />
-            <Route path="/:username/:slug" element={<Blog />} />
+            {/* <Route path="/:username/:slug" element={<Blog />} /> */}
+            <Route path="/post/:postId" element={<Blog />} />
+
             <Route path="/contact" element={<Contact />} />
 
-            <Route path=":username" element={<Profile />} />
+            <Route path="/user/:userid" element={<Profile />} />
 
             {/* <Route path="/register" element={<Register />} /> */}
             <Route path="/settings" element={<Settings />}>
@@ -71,12 +62,14 @@ function App() {
           </Route>
         </Route>
 
-        <Route element={<ProtectedRoute isAllowed={!!user} />}>
-          <Route path="/:username/:slug/edit" element={<EditPost />} />
+        <Route element={<ProtectedRoute acceptedRoles={['Student','Teacher']} />}>
+          {/* <Route path="/:username/:slug/edit" element={<EditPost />} /> */}
+          <Route path="/post/:postId/edit" element={<EditPost />} />
+
           <Route path="/new" element={<CreatePost />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </ThemeProvider>
   );
