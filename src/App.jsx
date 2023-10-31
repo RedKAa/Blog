@@ -36,7 +36,7 @@ function App() {
           <Route element={<ProtectedRoute acceptedRoles={['Student','Teacher']} />}>
             <Route index element={<Home />} />
             {/* <Route path="/:username/:slug" element={<Blog />} /> */}
-            <Route path="/post/:postId" element={<Blog />} />
+            <Route path="/post/:slug" element={<Blog />} />
 
             <Route path="/contact" element={<Contact />} />
 

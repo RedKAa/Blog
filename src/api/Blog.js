@@ -72,10 +72,10 @@ export const allBlogsOfUser = (id) => {
 //   }
 // };
 
-export const getPostBySlug = (id) => {
+export const getPostBySlug = (slug) => {
   return request.get(`/posts`, {
     params: {
-      authorId: id,
+      slug: slug,
     },
   });
 };

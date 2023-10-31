@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import styled from "styled-components";
 import SaveIcon from "./save-icon/SaveIcon";
+import moment from "moment/moment";
 
 const { Title, Text } = Typography;
 const PreviewContainer = styled.div`
@@ -151,10 +152,14 @@ const SaveButton = styled.button`
 `;
 
 const PreviewPost = React.forwardRef(({ post }, ref) => {
-  const { id, title, author, tags } = post; //slug, createdAt
+  const { id, title, author, tags, slug, createdAt, cover } = post;
+
   return (
     <PreviewContainer ref={ref}>
       <article>
+      <PreviewTop>
+          {cover.length > 20 && <img width="100%" src={cover} alt={id} />}
+        </PreviewTop>
         <PreviewTop>
           <PreviewImg
             src={`${import.meta.env.VITE_URL}/${author.avatarLink}`}
@@ -168,28 +173,27 @@ const PreviewPost = React.forwardRef(({ post }, ref) => {
                 {author.userName}
               </Title>
             </PreviewTopTitleLink>
-            {/* <PreviewTopDate>
-              <time dateTime={createdAt}>
-                {format(new Date(createdAt), "MMM d, y")}
-              </time>
-            </PreviewTopDate> */}
+            <PreviewTopDate>
+              {moment(createdAt).format('HH:mm DD-MM-YYYY')}
+            </PreviewTopDate>
           </div>
         </PreviewTop>
         <PreviewBody>
           <PreviewTitle level={3}>
-            {/* <Link to={`/${author.username}/${slug}`}>{title} </Link> */}
-            <Link to={`/post/${id}`}>{title} </Link>
-
+            <Link to={`/post/${slug}`}>{title} </Link>
           </PreviewTitle>
 
-          <PreviewTags>
-            {tags.map((t) => (
+          {/* <PreviewTags>
+            {tags?.map((t) => (
               <PreviewTag key={t.tag.id}>
                 <span className="prefix">#</span>
                 {t.tag.name}
               </PreviewTag>
             ))}
-          </PreviewTags>
+          </PreviewTags> */}
+
+
+
           <PreviewBottom>
             <PreviewReactions>
               <Reaction>

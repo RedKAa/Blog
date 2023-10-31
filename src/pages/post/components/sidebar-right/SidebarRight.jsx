@@ -16,11 +16,11 @@ const SidebarRight = ({ author }) => {
                 />
               </S.WrapperImage>
               <S.SubTitle>
-                {author?.firstName} {author?.lastName}
+                {author?.userName}
               </S.SubTitle>
             </S.Link>
           </S.Header>
-          <S.Description>{author?.intro}</S.Description>
+          <S.Description>{author?.bio}</S.Description>
           <S.Details>
             <ul>
               <li>

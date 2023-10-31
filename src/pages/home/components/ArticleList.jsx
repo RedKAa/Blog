@@ -6,7 +6,6 @@ const ArticleList = () => {
   const { loading, error, posts, hasMore } = useBlogs(pageNumber);
   const observer = useRef();
 
-  console.log(posts)
   const lastElementPostRef = useCallback(
     (node) => {
       if (loading) return;

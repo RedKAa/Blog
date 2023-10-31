@@ -26,14 +26,9 @@ const Post = () => {
     setStatus("pending");
     getPostBySlug(slug)
       .then((res) => {
-        if (res.status === 200) {
-          console.log("fetch post id : ", res.data.id);
-          setPost(res.data);
+        if(res.data[0]){
+          setPost(res.data[0]);
           setStatus("resolved");
-        }
-
-        if (res.response?.status === 400) {
-          throw res.response.data.message;
         }
       })
       .catch((e) => {
@@ -53,8 +48,8 @@ const Post = () => {
           <S.Article>
             {post.cover && (
               <S.Cover
-                src={`${import.meta.env.VITE_URL}/${post.cover}`}
-                alt=""
+                src={`${post.cover}`}
+                alt={post.id}
               />
             )}
 

@@ -79,6 +79,22 @@ const Home = () => {
                 </SidebarLink>
               </li>
               <li>
+                <SidebarLink to="videos">
+                  <span>
+                    {/* <img src={tagIcon} alt="tags icon" /> */}
+                  </span>
+                  Videos
+                </SidebarLink>
+              </li>
+              <li>
+                <SidebarLink to="subjects">
+                  <span>
+                    {/* <img src={tagIcon} alt="tags icon" /> */}
+                  </span>
+                  Subjects
+                </SidebarLink>
+              </li>
+              <li>
                 <SidebarLink to="tags">
                   <span>
                     {/* <img src={tagIcon} alt="tags icon" /> */}
@@ -95,14 +111,19 @@ const Home = () => {
               <ul>
                 <li>
                   <SecondaryNavLink $active={true} to="/latest">
+                    Relevant
+                  </SecondaryNavLink>
+                </li>
+                <li>
+                  <SecondaryNavLink $active={false} to="/top">
                     Latest
                   </SecondaryNavLink>
                 </li>
-                {/* <li>
+                <li>
                   <SecondaryNavLink $active={false} to="/top">
                     Top
                   </SecondaryNavLink>
-                </li> */}
+                </li>
               </ul>
             </nav>
           </header>
@@ -114,22 +135,3 @@ const Home = () => {
 };
 
 export default Home;
-/*
-https://github.com/Rizwan17/reactjs-blog/
-
-https://github.com/weihomechen/blog/
-
-https://profy.dev/article/react-folder-structure
-
-https://www.freecodecamp.org/news/fullstack-react-blog-app-with-express-and-psql/
-
-
- -- infinite scroll with reactjs:
- https://www.youtube.com/watch?v=NZKUirTtxcg
- https://www.youtube.com/watch?v=2IbRtjez6ag
- https://www.youtube.com/watch?v=JWlOcDus_rs
-
-
-
- https://www.youtube.com/watch?v=6ardZEhjvV0
-*/
