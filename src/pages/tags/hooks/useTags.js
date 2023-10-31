@@ -28,10 +28,7 @@ export default function useTags(pageNumber, q) {
           ];
         });
         const lastPage =  Math.ceil(total / pageSize);
-        console.log("tag page : ", current, "| lastpage : ", lastPage);
-
         setHasMore(current < lastPage);
-
         setLoading(false);
       })
       .catch((e) => {

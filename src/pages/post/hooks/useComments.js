@@ -19,12 +19,12 @@ export default function useComments(postId, pageNumber) {
     getComments(postId, pageNumber)
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
-        let { _metadata, records } = res.data;
+        let { total,current,pageSize, data } = res;
 
         setComments((prevComments) => {
           return [
             ...new Map(
-              [...prevComments, ...records].map((comment) => [
+              [...prevComments, ...data].map((comment) => [
                 comment["id"],
                 comment,
               ])
@@ -34,8 +34,8 @@ export default function useComments(postId, pageNumber) {
           //return [...[...prevComments, ...records]];
         });
 
-        const lastPage = Math.ceil(_metadata.total_count / _metadata.per_page);
-        setHasMore(_metadata.page < lastPage);
+        const lastPage = Math.ceil(total / pageSize);
+        setHasMore(current < lastPage);
         setLoading(false);
       })
       .catch((e) => {

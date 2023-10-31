@@ -70,21 +70,13 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
 
   const onFinish = (values) => {
     setStatus("pending");
-    form.append("title", values.title);
-    form.append("content", contentField);
-    form.append("tags", values.tags);
-
+    let formData = {...values, content: contentField};
     if(fileList[0]) {
       upload(fileList[0].originFileObj).then((res) => {
-        form.append("cover", res.data);
-        console.log("formData",form);
-
-        handleFetch(formData, resetFields);
+        handleFetch({...formData, cover: res.data }, resetFields);
       });
     } else {
-      console.log("1formData",form);
-
-      handleFetch(formData, resetFields);
+      handleFetch({...formData, cover: ''}, resetFields);
     }
   };
 
@@ -148,7 +140,7 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
             onClose={() => setStatus("idle")}
           />
         )}
-        {/* {status === "resolved" && (
+        {status === "resolved" && (
           <Alert
             message={
               post ? "Post updated with Success" : "Post Submitted with Success"
@@ -157,7 +149,7 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
             closable
             onClose={() => setStatus("idle")}
           />
-        )} */}
+        )}
         <Form
           form={form}
           onFinish={onFinish}

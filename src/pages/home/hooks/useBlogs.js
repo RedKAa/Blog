@@ -19,9 +19,6 @@ export default function useBlogs(pageNumber) {
         });
 
         const lastPage = Math.ceil(total / pageSize);
-
-        console.log("page : ", current, "| lastpage : ", lastPage);
-
         setHasMore(current < lastPage);
         setLoading(false);
       })

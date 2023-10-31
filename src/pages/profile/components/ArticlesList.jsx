@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback } from "react";
 import useBlogs from "../hooks/useBlogs";
-import PreviewPost from "components/preview-post/PreviewPost";
+import PreviewPost from "../../../components/preview-post/PreviewPost";
 
 const ArticlesList = ({ userId }) => {
   const [pageNumber, setPageNumber] = useState(1);

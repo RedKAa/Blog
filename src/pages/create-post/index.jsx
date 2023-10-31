@@ -17,7 +17,6 @@ const CreatePost = () => {
   const [error, setError] = useState(null);
 
   const handleFetch = (formData, resetFields) => {
-    console.log("handleFetch",formData);
     createBlog(formData)
       .then((res) => {
         resetFields();

@@ -1,7 +1,10 @@
 import axios from "axios";
 import request from '../utils/requestServer';
+import { getUserInfo } from "../utils/utils";
 
 const URL = import.meta.env.VITE_URL;
+
+const authUser = getUserInfo();
 
 // export const getBlogs = async (p = 1, filters) => {
 //   try {
@@ -95,7 +98,8 @@ export const getPostBySlug = (id) => {
 export const createBlog = (newPost) => {
   return request.post(`/posts`, {
     data: {
-      ...newPost
+      ...newPost,
+      authorId:authUser.id
     },
   });
 }

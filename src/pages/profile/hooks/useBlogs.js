@@ -12,8 +12,7 @@ export default function useBlogs(pageNumber, authorId) {
     getBlogs(pageNumber, { AuthorId: authorId })
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
-        let { total, pageSize, current, data } = res.data;
-
+        let { total, pageSize, current, data } = res;
         setPosts((prevBlogs) => {
           return [
             ...new Map(
@@ -23,7 +22,6 @@ export default function useBlogs(pageNumber, authorId) {
         });
 
         const lastPage = Math.ceil(total / pageSize);
-
         setHasMore(current < lastPage);
         setLoading(false);
       })
@@ -32,5 +30,6 @@ export default function useBlogs(pageNumber, authorId) {
         setLoading(false);
       });
   }, [pageNumber, authorId]);
+
   return { loading, error, posts, hasMore };
 }
