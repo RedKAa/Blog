@@ -27,21 +27,17 @@ export const getUserById = (id) => {
     }
   });
 };
-export async function getUsers(p, filters) {
-  try {
-    const response = await axios({
-      url: `${URL}/users`,
-      method: "GET",
-      params: {
-        page: p,
-        ...filters,
-      },
-    });
-    return response;
-  } catch (e) {
-    return e;
-  }
-}
+
+
+export const getUsers = (p, filters) => {
+  return request.get('/users', {
+    params: {
+      page: p,
+      ...filters
+    },
+    useCache: true,
+  });
+};
 
 export async function getUser(id) {
   try {
@@ -51,15 +47,6 @@ export async function getUser(id) {
     return e;
   }
 }
-
-// export async function getUserByUsername(username) {
-//   try {
-//     const res = await axios.get(`${URL}/users/user/${username}`);
-//     return res;
-//   } catch (e) {
-//     return e;
-//   }
-// }
 
 export async function removeUser(id) {
   try {

@@ -6,6 +6,7 @@ import { useUserStore } from "../../../../store/user";
 import { createComment } from "../../../../api/Comment";
 import { commentsAtom } from "../../atom/comments";
 import * as S from "./styles";
+import { USER_DEFAULT_IMG } from "../../../../utils/utils";
 
 const NewComment = ({ postId }) => {
   const authUser = useUserStore((state) => state.user);
@@ -52,7 +53,9 @@ const NewComment = ({ postId }) => {
 
       <S.NewComment>
         <S.Image
-          src={`${import.meta.env.VITE_URL}/${authUser.img}`}
+          src={`${(authUser.avatarLink && authUser.avatarLink.length > 20)
+            ? `${authUser.avatarLink}`
+            : USER_DEFAULT_IMG}`}
           alt="user image"
           height="32"
           width="32"

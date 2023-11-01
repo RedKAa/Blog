@@ -49,12 +49,12 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
   useEffect(() => {
     if (post?.cover) {
       urlToObject(
-        `${import.meta.env.VITE_URL}/${post?.cover}`,
+        `${post?.cover}`,
         post?.cover
       ).then((res) => {
         setFileList([
           {
-            url: `${import.meta.env.VITE_URL}/${post?.cover}`,
+            url: `${post?.cover}`,
             originFileObj: res,
           },
         ]);

@@ -8,6 +8,8 @@ import {
 } from "@ant-design/icons";
 import "../../../profile/components/article/article.css";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import { USER_DEFAULT_IMG } from "../../../../utils/utils";
 
 const { Title, Text } = Typography;
 const Article = React.forwardRef(({ post }, ref) => {
@@ -18,19 +20,19 @@ const Article = React.forwardRef(({ post }, ref) => {
         <div className="story__top">
           <img
             className="story__author-pic"
-            src={`${import.meta.env.VITE_URL}/${author.img}`}
+            src={`${(author.avatarLink && author.avatarLink.length > 20)
+              ? `${author.avatarLink}`
+              : USER_DEFAULT_IMG}`}
             alt="said"
             width="34"
             height="34"
           />
           <div>
             <Title className="story__author-name" level={5}>
-              {author.lastName} {author.firstName}
+              {author.userName}
             </Title>
             <Text>
-              <time dateTime={createdAt}>
-                {format(new Date(createdAt), "MMM d, y")}
-              </time>
+              {moment(createdAt).format('HH:mm DD-MM-YYYY')}
             </Text>
           </div>
         </div>

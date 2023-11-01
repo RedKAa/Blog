@@ -14,11 +14,10 @@ export default function useUsers(pageNumber, q) {
   useEffect(() => {
     setLoading(true);
     setError(false);
-    getUsers(pageNumber, { q })
+    getUsers(pageNumber, { userName: q})
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
         let { total, pageSize, current, data } = res;
-
         setUsers((prevUsers) => {
           return [...prevUsers, ...data];
         });

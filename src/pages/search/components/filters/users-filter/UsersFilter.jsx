@@ -5,10 +5,14 @@ import { pageNumberAtom } from "../../../store/page-number";
 
 import * as S from "./styles";
 import { Link } from "react-router-dom";
+import { Empty } from "antd";
+import { USER_DEFAULT_IMG } from "../../../../../utils/utils";
 
 function UsersFilter({ q }) {
   const [pageNumber, setPageNumber] = useAtom(pageNumberAtom);
   const { loading, users, error, hasMore } = useUsers(pageNumber, q);
+
+  console.log(users);
 
   const observer = useRef();
   const lastUserElementRef = useCallback(
@@ -34,25 +38,28 @@ function UsersFilter({ q }) {
           return <User key={user.id} user={user} />;
         }
       })}
+      {users.length === 0 && <Empty />}
     </div>
   );
 }
 
 const User = forwardRef(({ user }, ref) => {
   return (
-    <Link to={`/${user.username}`}>
+    <Link to={`/user/${user.id}`}>
       <S.User ref={ref}>
         <S.Image
-          src={`${import.meta.env.VITE_URL}/${user.img}`}
-          alt={`${user.firstName} ${user.lastName}`}
+          src={(user.avatarLink && user.avatarLink.length > 20)
+            ? `${user.avatarLink}`
+            : USER_DEFAULT_IMG}
+          alt={`${user.userName}`}
           height={32}
           width={32}
         />
         <div>
           <S.Title level={4}>
-            {user.firstName} {user.lastName}
+            {user.userName}
           </S.Title>
-          <S.Text>{user.username}</S.Text>
+          <S.Text>{user.role}</S.Text>
         </div>
       </S.User>
     </Link>

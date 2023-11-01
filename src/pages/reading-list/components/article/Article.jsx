@@ -4,6 +4,7 @@ import * as S from "./styles";
 
 import { format } from "date-fns";
 import { Fragment } from "react";
+import { USER_DEFAULT_IMG } from "../../../../utils/utils";
 const { Title, Text } = Typography;
 
 const Article = ({ post, onDelete }) => {
@@ -12,7 +13,9 @@ const Article = ({ post, onDelete }) => {
       <S.CardWrapper>
         <Link to={`/${post.author?.username}`} style={{ display: "block" }}>
           <S.CardImage
-            src={`${import.meta.env.VITE_URL}/${post.author?.img}`}
+           src={`${(post.author.avatarLink && post.author.avatarLink.length > 20)
+            ? `${post.author.avatarLink}`
+            : USER_DEFAULT_IMG}`}
             height={32}
             width={32}
             alt=""

@@ -10,6 +10,7 @@ import {
 import styled from "styled-components";
 import SaveIcon from "./save-icon/SaveIcon";
 import moment from "moment/moment";
+import { USER_DEFAULT_IMG } from "../../utils/utils";
 
 const { Title, Text } = Typography;
 const PreviewContainer = styled.div`
@@ -162,13 +163,15 @@ const PreviewPost = React.forwardRef(({ post }, ref) => {
         </PreviewTop>
         <PreviewTop>
           <PreviewImg
-            src={`${import.meta.env.VITE_URL}/${author.avatarLink}`}
+            src={`${(author.avatarLink && author.avatarLink.length > 20)
+              ? `${author.avatarLink}`
+              : USER_DEFAULT_IMG}`}
             alt="said"
             width="34"
             height="34"
           />
           <div>
-            <PreviewTopTitleLink>
+            <PreviewTopTitleLink to={`/user/${author.id}`}>
               <Title level={5}>
                 {author.userName}
               </Title>

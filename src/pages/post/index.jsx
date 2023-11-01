@@ -13,6 +13,7 @@ import SidebarRight from "./components/sidebar-right/SidebarRight";
 
 import * as S from "./styles";
 import SidebarLeft from "./components/sidebar-left/SidebarLeft";
+import { USER_DEFAULT_IMG } from "../../utils/utils";
 
 const Post = () => {
   const { slug } = useParams();
@@ -57,14 +58,16 @@ const Post = () => {
               <S.WrapperDetails>
                 <S.Details>
                   <S.Avatar
-                    src={`${import.meta.env.VITE_URL}/${post.author?.img}`}
-                    alt={`${post.author?.firstName} ${post.author?.lastName}`}
+                    src={`${(post.author.avatarLink && post.author.avatarLink.length > 20)
+                      ? `${post.author.avatarLink}`
+                      : USER_DEFAULT_IMG}`}
+                    alt={`${post.author?.userName}`}
                     width="40"
                     height="40"
                   />
                   <div>
                     <S.AuthorName>
-                      {post.author?.firstName} {post.author?.lastName}
+                      {post.author?.userName}
                     </S.AuthorName>
                     <S.PublishDate>
                       Posted on{" "}
@@ -78,7 +81,7 @@ const Post = () => {
                 {authUser?.id === post.author?.id && (
                   <S.AuthorActions>
                     <S.EditLink
-                      to={`/${post.author?.username}/${post.slug}/edit`}
+                      to={`/post/${post.slug}/edit`}
                     >
                       Edit
                     </S.EditLink>

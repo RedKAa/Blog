@@ -14,7 +14,7 @@ export default function useTags(pageNumber, q) {
   useEffect(() => {
     setLoading(true);
     setError(false);
-    getTags({ page: pageNumber, q })
+    getTags({ page: pageNumber, name: q })
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
         let { total, pageSize, current, data } = res;

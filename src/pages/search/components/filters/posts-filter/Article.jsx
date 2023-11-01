@@ -17,14 +17,16 @@ const Article = React.forwardRef(({ post }, ref) => {
         <div className="story__top">
           <img
             className="story__author-pic"
-            src={`${import.meta.env.VITE_URL}/${author.img}`}
+            src={`${(author.avatarLink && author.avatarLink.length > 20)
+              ? `${author.avatarLink}`
+              : USER_DEFAULT_IMG}`}
             alt="said"
             width="34"
             height="34"
           />
           <div>
             <Title className="story__author-name" level={5}>
-              {author.lastName} {author.firstName}
+              {author.userName}
             </Title>
             <Text>
               <time dateTime={createdAt}>

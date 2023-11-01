@@ -9,13 +9,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useAtom } from "jotai";
-// import userDefaultImg from "../../public/img/user.png";
 import * as S from "./styles";
 import { useLogout } from "../../hooks/useLogout";
 import Container from "../../components/utils/Container";
 import { useUserStore } from "../../store/user";
 import { pageNumberAtom } from "../../pages/search/store/page-number";
-import { getUserInfo, logOut } from "../../utils/utils";
+import { USER_DEFAULT_IMG, getUserInfo, logOut } from "../../utils/utils";
 
 let rightItems = [
   {
@@ -44,19 +43,18 @@ function NavBar() {
         {
           key: "auth1",
           label: (
-            // <Avatar
-            //   src={
-            //     authUser.img
-            //       ? `${import.meta.env.VITE_URL}/${authUser.img}`
-            //       : userDefaultImg
-            //   }
-            // />
-            <>Ava</>
+            <Avatar
+              src={
+                (authUser.avatarLink && authUser.avatarLink.length > 20)
+                  ? `${authUser.avatarLink}`
+                  : USER_DEFAULT_IMG
+              }
+            />
           ),
           children: [
             {
               label: (
-                <Link to={`/${authUser.username}`}>
+                <Link to={`/user/${authUser.id}`}>
                   <UserOutlined style={{ marginRight: "8px" }} />
                   Profile
                 </Link>

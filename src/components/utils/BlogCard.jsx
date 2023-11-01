@@ -66,7 +66,7 @@ function BlogCard({ blog, operation, userId, setBlogs }) {
           // if u do === you well check the type also. authUser.id (number) & userId(string)
           operation && authUser.id === +userId
             ? [
-                <Link to={`/profile/${userId}/blogs/${blog.id}/edit`}>
+                <Link to={`/post/${blog.id}/edit`}>
                   <EditOutlined />
                 </Link>,
                 <DeleteOutlined onClick={handleShow} />,

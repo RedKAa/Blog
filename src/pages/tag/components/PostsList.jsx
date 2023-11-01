@@ -7,6 +7,8 @@ const PostsList = ({ tagId }) => {
 
   const { loading, error, posts, hasMore } = useBlogs(pageNumber, tagId);
 
+  
+
   const observer = useRef();
 
   const lastElementPostRef = useCallback(
@@ -38,6 +40,9 @@ const PostsList = ({ tagId }) => {
           return <PreviewPost key={post.id} post={post} />;
         }
       })}
+      {posts.length == 0 && <>
+        No results.
+      </>}
     </div>
   );
 };

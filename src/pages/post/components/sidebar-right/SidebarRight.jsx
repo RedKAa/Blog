@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 
 import * as S from "./styles.js";
+import { USER_DEFAULT_IMG } from "../../../../utils/utils.js";
 
 const SidebarRight = ({ author }) => {
   return (
@@ -8,10 +9,12 @@ const SidebarRight = ({ author }) => {
       <S.SidebarRightInner>
         <S.Card>
           <S.Header>
-            <S.Link to={`/profile/${author?.id}`}>
+            <S.Link to={`/user/${author?.id}`}>
               <S.WrapperImage>
                 <S.Image
-                  src={`${import.meta.env.VITE_URL}/${author?.img}`}
+                  src={`${(author.avatarLink && author.avatarLink.length > 20)
+                    ? `${author.avatarLink}`
+                    : USER_DEFAULT_IMG}`}
                   alt="author image"
                 />
               </S.WrapperImage>

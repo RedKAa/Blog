@@ -4,7 +4,7 @@ import { useUserStore } from "../../../../store/user";
 
 import * as S from "./styles";
 import { Link } from "react-router-dom";
-import { getUserInfo } from "../../../../utils/utils";
+import { USER_DEFAULT_IMG, getUserInfo } from "../../../../utils/utils";
 
 const UserPreview = ({ user }) => {
   const authUser = getUserInfo();
@@ -16,12 +16,14 @@ const UserPreview = ({ user }) => {
   return (
     <S.ProfileHeader>
       <S.HeaderTop>
-        {/* <S.Image
-          src={user.img ? `${import.meta.env.VITE_URL}/${user.img}` : userImage}
+        <S.Image
+          src={`${(user.avatarLink && user.avatarLink.length > 20)
+            ? `${user.avatarLink}`
+            : USER_DEFAULT_IMG}`}
           width="128"
           height="128"
           alt="said"
-        /> */}
+        />
         {authUser.id === user.id && (
           <Link to="/settings">
             <S.Button type="primary" size="large">

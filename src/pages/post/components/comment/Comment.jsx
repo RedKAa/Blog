@@ -9,7 +9,7 @@ import parse from "html-react-parser";
 const Comment = forwardRef(({ comment }, ref) => {
   return (
     <S.Comment ref={ref}>
-      <S.ImageLink to={`/profile/${comment.user?.id}`}>
+      <S.ImageLink to={`/user/${comment.user?.id}`}>
         <S.Image
           src={`${import.meta.env.VITE_URL}/${comment.user?.img}`}
           alt="comment user image"
@@ -17,7 +17,7 @@ const Comment = forwardRef(({ comment }, ref) => {
       </S.ImageLink>
       <S.Content>
         <S.Header>
-          <Link to={`/profile/${comment.user?.id}`}>
+          <Link to={`/user/${comment.user?.id}`}>
             <S.Button type="text">
               {comment.user?.firstName} {comment.user?.lastName}
             </S.Button>

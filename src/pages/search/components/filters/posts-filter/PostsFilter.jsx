@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import PreviewPost from "components/preview-post/PreviewPost";
 import useBlogs from "../../../hooks/useBlogs";
 import { pageNumberAtom } from "../../../store/page-number";
+import { Empty } from "antd";
 
 function PostsFilter({ q }) {
   const [pageNumber, setPageNumber] = useAtom(pageNumberAtom);
@@ -35,6 +36,7 @@ function PostsFilter({ q }) {
           return <PreviewPost key={post.id} post={post} />;
         }
       })}
+      {posts.length === 0 && <Empty />}
     </section>
   );
 }

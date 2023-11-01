@@ -29,8 +29,7 @@ const URL = import.meta.env.VITE_URL;
 export const getTags = (filters) => {
   return request.get('/tags', {
     params: {
-      ...filters,
-      'status': 'Active'
+      ...filters
     },
     useCache: true,
   });

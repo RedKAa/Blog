@@ -5,6 +5,7 @@ import "./tags-filter.css";
 import { useAtom } from "jotai";
 import { pageNumberAtom } from "../../../store/page-number";
 import * as S from "./styles";
+import { Empty } from "antd";
 
 function TagsFilter({ q }) {
   const [pageNumber, setPageNumber] = useAtom(pageNumberAtom);
@@ -37,6 +38,7 @@ function TagsFilter({ q }) {
           return <Tag key={tag.id} tag={tag} />;
         }
       })}
+      {tags.length === 0 && <Empty />}
     </section>
   );
 }
