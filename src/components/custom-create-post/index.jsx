@@ -80,6 +80,12 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
     }
   };
 
+  const normalizeImg = ([firstImg]) => {
+    const { response } = firstImg || {};
+    console.log(response);
+    return response;
+  };
+
   const normFile = (e) => {
     return e?.file;
   };
@@ -168,6 +174,7 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
                 name="cover"
                 valuePropName="file"
                 getValueFromEvent={normFile}
+                // normalize={normalizeImg}
               >
                 <S.Upload
                   className="upload"

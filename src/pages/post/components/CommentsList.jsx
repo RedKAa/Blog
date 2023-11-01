@@ -7,6 +7,9 @@ const CommentsList = ({ postId }) => {
   const { comments, loading, hasMore, error } = useComments(postId, pageNumber);
   const observer = useRef();
 
+
+  // console.log(comments);
+
   const lastElementCommentRef = useCallback(
     (node) => {
       if (loading) return;

@@ -13,7 +13,7 @@ import SidebarRight from "./components/sidebar-right/SidebarRight";
 
 import * as S from "./styles";
 import SidebarLeft from "./components/sidebar-left/SidebarLeft";
-import { USER_DEFAULT_IMG } from "../../utils/utils";
+import { USER_DEFAULT_IMG, getUserInfo } from "../../utils/utils";
 
 const Post = () => {
   const { slug } = useParams();
@@ -21,7 +21,7 @@ const Post = () => {
 
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
-  const authUser = useUserStore((state) => state.user);
+  const authUser = getUserInfo();
 
   useEffect(() => {
     setStatus("pending");

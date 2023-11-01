@@ -6,10 +6,10 @@ import { useUserStore } from "../../../../store/user";
 import { createComment } from "../../../../api/Comment";
 import { commentsAtom } from "../../atom/comments";
 import * as S from "./styles";
-import { USER_DEFAULT_IMG } from "../../../../utils/utils";
+import { USER_DEFAULT_IMG, getUserInfo } from "../../../../utils/utils";
 
 const NewComment = ({ postId }) => {
-  const authUser = useUserStore((state) => state.user);
+  const authUser = getUserInfo();
   const [comments, setComments] = useAtom(commentsAtom);
   const [newComment, setNewComment] = useState("");
   const [status, setStatus] = useState("idle");
@@ -18,6 +18,7 @@ const NewComment = ({ postId }) => {
     createComment({
       postId,
       content: newComment,
+      commenterId: authUser.id
     })
       .then((res) => {
         if (res.status === 201) {

@@ -64,7 +64,7 @@ function App() {
 
         <Route element={<ProtectedRoute acceptedRoles={['Student','Teacher']} />}>
           {/* <Route path="/:username/:slug/edit" element={<EditPost />} /> */}
-          <Route path="/post/:postId/edit" element={<EditPost />} />
+          <Route path="/post/:slug/edit" element={<EditPost />} />
 
           <Route path="/new" element={<CreatePost />} />
         </Route>

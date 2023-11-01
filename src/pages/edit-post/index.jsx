@@ -6,7 +6,7 @@ import { contentFieldAtom } from "../../components/custom-create-post/store/cont
 import { updateBlog, getPostBySlug } from "../../api/Blog";
 
 const EditPost = () => {
-  const { username, slug } = useParams();
+  const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [postStatus, setPostStatus] = useState("idle");
   const [status, setStatus] = useState("idle");
@@ -17,18 +17,10 @@ const EditPost = () => {
     setPostStatus("pending");
     getPostBySlug(slug)
       .then((res) => {
-        if (res.status === 200) {
-          setPost(res.data);
-          setPostStatus("resolved");
-        }
-
-        if (res.response?.status === 400) {
-          throw new Error(res.response.data.message);
-        }
+        console.log(res.data[0]);
+        setPost(res.data[0]);
+        setPostStatus("resolved");
       })
-      .catch((e) => {
-        setPostStatus("rejected");
-      });
   }, [slug]);
 
   useEffect(() => {
@@ -38,11 +30,9 @@ const EditPost = () => {
   }, [navigate, postStatus]);
 
   const handleFetch = (values) => {
-    updateBlog(slug, values)
+    updateBlog(post.id, values)
       .then((res) => {
-        if (res.status === 200) {
-          setStatus("resolved");
-        }
+        setStatus("resolved");
       })
       .catch((e) => {
         setStatus("rejected");

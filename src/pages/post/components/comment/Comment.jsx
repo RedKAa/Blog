@@ -5,29 +5,33 @@ import { format } from "date-fns";
 import * as S from "./styles";
 
 import parse from "html-react-parser";
+import moment from "moment";
+import { USER_DEFAULT_IMG } from "../../../../utils/utils";
 
 const Comment = forwardRef(({ comment }, ref) => {
   return (
     <S.Comment ref={ref}>
-      <S.ImageLink to={`/user/${comment.user?.id}`}>
+      <S.ImageLink to={`/user/${comment.commenter?.id}`}>
         <S.Image
-          src={`${import.meta.env.VITE_URL}/${comment.user?.img}`}
+          src={
+            (comment.commenter?.avatarLink && comment.commenter?.avatarLink.length > 20)
+              ? `${comment.commenter?.avatarLink}`
+              : USER_DEFAULT_IMG
+          }
           alt="comment user image"
         />
       </S.ImageLink>
       <S.Content>
         <S.Header>
-          <Link to={`/user/${comment.user?.id}`}>
+          <Link to={`/user/${comment.commenter?.id}`}>
             <S.Button type="text">
-              {comment.user?.firstName} {comment.user?.lastName}
+              {comment.commenter?.userName}
             </S.Button>
           </Link>
 
           <S.SeparateDot>·</S.SeparateDot>
           <S.PublishDate>
-            <time dateTime={comment.createdAt}>
-              {format(new Date(comment.createdAt || Date.now()), "MMM d, y")}
-            </time>
+          {moment(comment.createdAt).format('HH:mm DD-MM-YYYY')}
           </S.PublishDate>
         </S.Header>
         <S.Description>{parse(`${comment.content}`)}</S.Description>
