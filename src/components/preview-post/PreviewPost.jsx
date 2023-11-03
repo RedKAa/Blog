@@ -186,14 +186,14 @@ const PreviewPost = React.forwardRef(({ post }, ref) => {
             <Link to={`/post/${slug}`}>{title} </Link>
           </PreviewTitle>
 
-          {/* <PreviewTags>
+          <PreviewTags>
             {tags?.map((t) => (
-              <PreviewTag key={t.tag.id}>
+              <PreviewTag key={t.id}>
                 <span className="prefix">#</span>
-                {t.tag.name}
+                {t.name}
               </PreviewTag>
             ))}
-          </PreviewTags> */}
+          </PreviewTags>
 
 
 
@@ -210,9 +210,9 @@ const PreviewPost = React.forwardRef(({ post }, ref) => {
             </PreviewReactions>
             <PreviewSave>
               {/* <PreviewSaveText>9 min</PreviewSaveText> */}
-              {/* <SaveButton type="text" size="small"> */}
+              <SaveButton type="text" size="small">
               <SaveIcon postId={post.id} />
-              {/* </SaveButton> */}
+              </SaveButton>
             </PreviewSave>
           </PreviewBottom>
         </PreviewBody>

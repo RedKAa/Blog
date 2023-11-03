@@ -60,7 +60,7 @@ export const checkReacted = async (post_id) => {
 // }
 
 export const toggleReaction = async (post_id) => {
-  console.log('toggleReaction', post_id);
+  // console.log('toggleReaction', post_id);
   const jwtToken = getAppToken();
   if (jwtToken) {
     try {
@@ -94,7 +94,7 @@ export const toggleReaction = async (post_id) => {
 // };
 
 export const nbrReactionsByPost = async (post_id) => {
-  console.log('nbrReactionsByPost', post_id);
+  // console.log('nbrReactionsByPost', post_id);
 
   const jwtToken = getAppToken();
   if (jwtToken) {

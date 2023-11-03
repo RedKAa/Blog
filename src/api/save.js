@@ -54,7 +54,7 @@ export const getAllTagsOfSaves = async () => {
 };
 
 export const checkSaved = async (post_id) => {
-  console.log('checkSaved', post_id);
+  // console.log('checkSaved', post_id);
 
   const jwtToken = getAppToken();
   if (jwtToken) {
@@ -75,7 +75,7 @@ export const checkSaved = async (post_id) => {
 };
 
 export const nbrSavesByPost = async (post_id) => {
-  console.log('nbrSavesByPoste', post_id);
+  // console.log('nbrSavesByPoste', post_id);
 
   const jwtToken = getAppToken();
   if (jwtToken) {
@@ -96,7 +96,7 @@ export const nbrSavesByPost = async (post_id) => {
 };
 
 export const toggleSave = async (post_id) => {
-  console.log('toggle save', post_id);
+  // console.log('toggle save', post_id);
   const jwtToken = getAppToken();
   if (jwtToken) {
     try {
