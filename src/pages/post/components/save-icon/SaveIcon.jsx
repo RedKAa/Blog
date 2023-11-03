@@ -6,19 +6,21 @@ import { useUserStore } from "../../../../store/user";
 import BookmarkFilled from "./BookmarkFilled";
 import BookmarkOutlined from "./BookmarkOutlined";
 import { Reaction } from "../sidebar-left/styles";
+import { getUserInfo } from "../../../../utils/utils";
 
 const SaveIcon = ({ postId }) => {
   const [savedActive, setSavedActive] = useState(false);
   const [nbrSaves, setNbrSaves] = useState(0);
   const [isModalOpen, setIsMOdalOpen] = useState(false);
-  const authUser = useUserStore((state) => state.user);
+  const authUser = getUserInfo();
 
   useEffect(() => {
     if (Object.keys(authUser).length !== 0) {
       checkSaved(postId)
         .then((res) => {
+          console.log('checkSaved stt',res);
           if (res.status === 200) {
-            setSavedActive(res.data.saved);
+            setSavedActive(res.data);
           }
         })
         .catch((e) => {
@@ -30,6 +32,8 @@ const SaveIcon = ({ postId }) => {
   useEffect(() => {
     nbrSavesByPost(postId)
       .then((res) => {
+        console.log('nbrSavesByPost stt',res);
+
         if (res.status === 200) {
           setNbrSaves(res.data);
         }
@@ -47,6 +51,9 @@ const SaveIcon = ({ postId }) => {
         .then((res) => {
           if (res.status === 201) {
             setSavedActive((prevSavedActive) => !prevSavedActive);
+          }
+          if(res.status === 200) {
+            setSavedActive(res.data);
           }
         })
         .catch((e) => {

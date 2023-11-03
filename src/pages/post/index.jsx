@@ -42,7 +42,7 @@ const Post = () => {
     return (
       <S.Layout>
         {status === "resolved" && (
-          <SidebarLeft postId={post.id} commentsCount={post._count?.comments} />
+          <SidebarLeft postId={post.id} commentsCount={post.comments?.length} />
         )}
 
         <S.Content>

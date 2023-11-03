@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getAppToken } from "../utils/utils";
 
 const URL = import.meta.env.VITE_URL;
 
@@ -53,17 +54,16 @@ export const getAllTagsOfSaves = async () => {
 };
 
 export const checkSaved = async (post_id) => {
-  const { token } = JSON.parse(localStorage.getItem("current_user")) || {
-    token: null,
-  };
-  if (token) {
+  console.log('checkSaved', post_id);
+
+  const jwtToken = getAppToken();
+  if (jwtToken) {
     try {
       const res = await axios({
-        url: `${URL}/saves/check`,
+        url: `${URL}/saves/${post_id}/check`,
         method: "GET",
-        params: { post_id },
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwtToken}`,
         },
       });
 
@@ -75,31 +75,36 @@ export const checkSaved = async (post_id) => {
 };
 
 export const nbrSavesByPost = async (post_id) => {
-  try {
-    const res = await axios({
-      url: `${URL}/saves/${post_id}`,
-      method: "GET",
-    });
-    return res;
-  } catch (error) {
-    return error;
+  console.log('nbrSavesByPoste', post_id);
+
+  const jwtToken = getAppToken();
+  if (jwtToken) {
+    try {
+      const res = await axios({
+        url: `${URL}/saves/${post_id}`,
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
+
+      return res;
+    } catch (error) {
+      return error;
+    }
   }
 };
 
 export const toggleSave = async (post_id) => {
-  const { token } = JSON.parse(localStorage.getItem("current_user")) || {
-    token: null,
-  };
-  if (token) {
+  console.log('toggle save', post_id);
+  const jwtToken = getAppToken();
+  if (jwtToken) {
     try {
       const res = await axios({
-        url: `${URL}/saves`,
+        url: `${URL}/saves/${post_id}`,
         method: "POST",
-        data: {
-          post_id,
-        },
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwtToken}`,
         },
       });
       return res;
@@ -110,19 +115,19 @@ export const toggleSave = async (post_id) => {
 };
 
 export const removeSave = async (id) => {
-  const { token } = JSON.parse(localStorage.getItem("current_user")) || {
-    token: null,
-  };
-  try {
-    const res = await axios({
-      url: `${URL}/saves/${id}`,
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return res;
-  } catch (error) {
-    return error;
+  const jwtToken = getAppToken();
+  if (jwtToken) {
+    try {
+      const res = await axios({
+        url: `${URL}/saves/${id}`,
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
+      return res;
+    } catch (error) {
+      return error;
+    }
   }
 };

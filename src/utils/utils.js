@@ -20,8 +20,6 @@ export const getAppToken = () => getLocalStorage('APP_TOKEN');
 
 export async function logOut() {
   deleteAllCookie();
-  removeLocalStorage('SYSTEM_ROLE');
-  setAuthority(null);
   removeAppToken();
   removeUserInfo();
 }

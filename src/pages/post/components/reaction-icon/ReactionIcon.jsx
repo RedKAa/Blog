@@ -21,8 +21,10 @@ const ReactionIcon = ({ postId }) => {
     if (Object.keys(authUser).length !== 0) {
       checkReacted(postId)
         .then((res) => {
-          console.log(res);
-          setReactionActive(res.data);
+          console.log('checkReacted',res);
+          if (res.status === 200) {
+            setReactionActive(res.data);
+          }
         })
     }
   }, [postId]);
@@ -30,7 +32,10 @@ const ReactionIcon = ({ postId }) => {
   useEffect(() => {
     nbrReactionsByPost(postId)
       .then((res) => {
-          setNbrReactions(res.length);
+        console.log('nbrSavesByPost stt',res);
+        if (res.status === 200) {
+          setNbrReactions(res.data.length);
+        }
       })
   }, [reactionActive, postId]);
 
@@ -40,7 +45,14 @@ const ReactionIcon = ({ postId }) => {
     } else {
       toggleReaction(postId)
       .then((res) => {
-          setReactionActive(res);
+        console.log('toggleReaction',res);
+
+          if (res.status === 201) {
+            setReactionActive((prevSavedActive) => !prevSavedActive);
+          }
+          if(res.status === 200) {
+            setReactionActive(res.data);
+          }
       })
       .catch((e) => {
         console.log(e);

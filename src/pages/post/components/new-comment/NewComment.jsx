@@ -14,44 +14,23 @@ const NewComment = ({ postId }) => {
   const [newComment, setNewComment] = useState("");
   const [status, setStatus] = useState("idle");
   const handleNewComment = () => {
-    setStatus("pending");
-    createComment({
-      postId,
-      content: newComment,
-      commenterId: authUser.id
-    })
-      .then((res) => {
-        if (res.status === 201) {
-          setComments((prevComments) => [res.data, ...prevComments]);
-          setNewComment("");
-
-          setStatus("resolved");
-        }
+    if(newComment) {
+      setStatus("pending");
+      createComment({
+        postId,
+        content: newComment,
+        commenterId: authUser.id
       })
-      .catch((e) => {
-        setStatus("rejected");
-      });
+        .then((res) => {
+            setComments((prevComments) => [res, ...prevComments]);
+            setNewComment("");
+            setStatus("resolved");
+        })
+    }
   };
 
   return (
     <>
-      {status === "rejected" && (
-        <Alert
-          type="error"
-          message="Something go wrong"
-          closable
-          style={{ margin: "8px 0px" }}
-        />
-      )}
-      {status === "resolved" && (
-        <Alert
-          type="success"
-          message="Your comment added with success"
-          closable
-          style={{ margin: "8px 0px" }}
-        />
-      )}
-
       <S.NewComment>
         <S.Image
           src={`${(authUser.avatarLink && authUser.avatarLink.length > 20)

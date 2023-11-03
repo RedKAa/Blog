@@ -127,14 +127,14 @@ request.interceptors.response.use((response, options) => {
     case 200:
       if (method !== 'GET')
         notification.success({
-          message: 'Thành công',
+          message: 'success',
           description: codeMessage[200],
         });
       break;
     case 201:
       if (method !== 'GET')
         notification.success({
-          message: 'Thành công',
+          message: 'success',
           description: codeMessage[201],
         });
       break;
