@@ -9,8 +9,8 @@ import { USER_DEFAULT_IMG, getUserInfo } from "../../../../utils/utils";
 const UserPreview = ({ user }) => {
   const authUser = getUserInfo();
 
-  console.log('auth',authUser);
-  console.log('user',user);
+  // console.log('auth',authUser);
+  // console.log('user',user);
 
 
   return (

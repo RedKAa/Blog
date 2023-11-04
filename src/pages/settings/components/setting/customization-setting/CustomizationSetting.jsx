@@ -5,20 +5,16 @@ import { useUserStore } from "../../../../../store/user";
 // import darkModeImg from "../../public/img/dark-mode-img.svg";
 // import lightModeImg from "../../public/img/light-mode-img.svg";
 import * as S from "./styles";
+import { getUserInfo, setUserInfo } from "../../../../../utils/utils";
 
 const CustomizationSetting = () => {
   const mode = useDarkModeStore((state) => state.mode);
   const setMode = useDarkModeStore((state) => state.setMode);
-  const authUser = useUserStore((state) => state.user);
-  const SetAuthUser = useUserStore((state) => state.setUser);
+  const authUser = getUserInfo();
 
   useEffect(() => {
     updateMode(mode).then(() => {
-      localStorage.setItem(
-        "current_user",
-        JSON.stringify({ ...authUser, mode })
-      );
-      SetAuthUser({ ...authUser, mode });
+      setUserInfo({ ...authUser, mode });
     });
   }, [mode]);
 
@@ -29,11 +25,11 @@ const CustomizationSetting = () => {
     <S.CustomizationSetting>
       <S.Title level={3}>Appearance</S.Title>
       <S.ThemeSelector>
-        <S.RadioWrapper onClick={() => setMode("LIGHT")}>
+        <S.RadioWrapper onClick={() => setMode("Light")}>
           <S.Radio
             name="config_theme"
             value="light_theme"
-            checked={mode === "LIGHT"}
+            checked={mode === "Light"}
           />
           <div>
             <S.Title level={5} style={{ marginTop: "0px" }}>
@@ -50,11 +46,11 @@ const CustomizationSetting = () => {
             /> */}
           </div>
         </S.RadioWrapper>
-        <S.RadioWrapper onClick={() => setMode("DARK")}>
+        <S.RadioWrapper onClick={() => setMode("Dark")}>
           <S.Radio
             name="config_theme"
             value="dark_theme"
-            checked={mode === "DARK"}
+            checked={mode === "Dark"}
           />
           <div>
             <S.Title level={5} style={{ marginTop: "0px" }}>

@@ -4,11 +4,8 @@ import { getAppToken } from "../utils/utils";
 const URL = import.meta.env.VITE_URL;
 
 export const getAllSavePosts = async (tag_id = 0, q) => {
-  const { token } = JSON.parse(localStorage.getItem("current_user")) || {
-    token: null,
-  };
-
-  if (token) {
+  const jwtToken = getAppToken();
+  if (jwtToken) {
     let params = {};
     if (tag_id !== 0) {
       params = { ...params, tag_id };
@@ -23,7 +20,7 @@ export const getAllSavePosts = async (tag_id = 0, q) => {
         method: "GET",
         params,
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwtToken}`,
         },
       });
       return res;
@@ -34,16 +31,14 @@ export const getAllSavePosts = async (tag_id = 0, q) => {
 };
 
 export const getAllTagsOfSaves = async () => {
-  const { token } = JSON.parse(localStorage.getItem("current_user")) || {
-    token: null,
-  };
-  if (token) {
+  const jwtToken = getAppToken();
+  if (jwtToken) {
     try {
       const res = await axios({
         url: `${URL}/saves/find-all-tags`,
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwtToken}`,
         },
       });
       return res;

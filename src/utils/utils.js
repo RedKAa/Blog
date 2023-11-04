@@ -12,6 +12,15 @@ export const getUserInfo = () => {
     return {}
   }
 }
+export const getTheme = () => {
+  try {
+    const user =  JSON.parse(getLocalStorage('USER_INFO'));
+    console.log('mode',user);
+    return user.mode;
+  } catch (error) {
+    return 'Light'
+  }
+}
 export const removeUserInfo = () => localStorage.removeItem('USER_INFO');
 // localStorage token
 export const removeAppToken = (token) => localStorage.removeItem('APP_TOKEN');

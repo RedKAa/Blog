@@ -36,6 +36,7 @@ function Login() {
           const user = await getCurrentUser();
           if(user) {
             setUserInfo(user);
+            setMode(user.mode);
             let loguser = getUserInfo();
             console.log('get user',loguser);
             if (locationState) {

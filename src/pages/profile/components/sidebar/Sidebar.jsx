@@ -6,11 +6,12 @@ import * as S from "./styles";
 const SideBar = () => {
   const [user] = useAtom(userAtom);
 
+  console.log(user);
   let totalposts = 0;
   let totalcomments = 0;
 
-  if(user.posts) {
-    totalposts = user.posts.length;
+  if(user.createPosts) {
+    totalposts = user.createPosts.length;
   }
   if(user.comments) {
     totalcomments = user.comments.length;

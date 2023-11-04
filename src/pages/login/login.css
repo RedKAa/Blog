@@ -1,3 +1,10 @@
+.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .login h1.login__title.ant-typography {
   font-size: 30px;
   font-weight: 700;

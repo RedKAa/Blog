@@ -8,9 +8,10 @@ import { Search as SearchNavbar } from "../../layouts/navbar/styles";
 
 import { totalSavesAtom } from "./atom/total-saves";
 import styled from "styled-components";
+import { getUserInfo } from "../../utils/utils";
 
 const ReadingList = () => {
-  const { id } = useUserStore((state) => state.user);
+  const { id } = getUserInfo();
   const [filter, setFilter] = useAtom(filterAtom);
   const [totalSaves] = useAtom(totalSavesAtom);
   const handleSearch = (value) => {

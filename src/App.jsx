@@ -30,7 +30,7 @@ import ProtectedRoute  from "./components/Routers/ProtectedRoute";
 function App() {
   const mode = useDarkModeStore((state) => state.mode);
   return (
-    <ThemeProvider theme={mode === "LIGHT" ? lightTheme : DarkTheme}>
+    <ThemeProvider theme={mode === "Light" ? lightTheme : DarkTheme}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route element={<ProtectedRoute acceptedRoles={['Student','Teacher']} />}>
@@ -46,7 +46,7 @@ function App() {
             <Route path="/settings" element={<Settings />}>
               <Route index element={<Navigate to="profile" />} />
               <Route path="profile" element={<ProfileSetting />} />
-              <Route path="account" element={<AccountSetting />}></Route>
+              {/* <Route path="account" element={<AccountSetting />}></Route> */}
               <Route
                 path="customization"
                 element={<CustomizationSetting />}

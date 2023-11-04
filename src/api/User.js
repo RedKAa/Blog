@@ -1,7 +1,10 @@
 import axios from "axios";
 import request from '../utils/requestServer';
+import { getAppToken, getUserInfo } from "../utils/utils";
 
 const URL = import.meta.env.VITE_URL;
+const authUser = getUserInfo();
+
 
 export async function getCurrentUser(options) {
   return request('/users/current', {
@@ -20,12 +23,7 @@ export const getUserByUsername = (name) => {
 };
 
 export const getUserById = (id) => {
-  console.log('getUserById');
-  return request.get('/users', {
-    params: {
-      'id': id,
-    }
-  });
+  return request.get(`/users/${id}`);
 };
 
 
@@ -67,13 +65,14 @@ export async function updateUser(id, formData) {
 }
 
 export async function updateMode(mode) {
-  const { token } = JSON.parse(localStorage.getItem("current_user"));
+  const jwtToken = getAppToken();
+
   try {
     const response = await axios({
-      url: `${URL}/users/update-mode`,
-      method: "patch",
-      params: { mode },
-      headers: { Authorization: `Bearer ${token}` },
+      url: `${URL}/users/${authUser.id}`,
+      method: "put",
+      data: { mode },
+      headers: { Authorization: `Bearer ${jwtToken}` },
     });
     return response;
   } catch (e) {

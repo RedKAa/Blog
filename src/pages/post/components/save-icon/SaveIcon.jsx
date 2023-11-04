@@ -18,7 +18,7 @@ const SaveIcon = ({ postId }) => {
     if (Object.keys(authUser).length !== 0) {
       checkSaved(postId)
         .then((res) => {
-          console.log('checkSaved stt',res);
+          // console.log('checkSaved stt',res);
           if (res.status === 200) {
             setSavedActive(res.data);
           }

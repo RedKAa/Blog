@@ -1,8 +1,10 @@
 import create from "zustand";
 import { mountStoreDevtool } from "simple-zustand-devtools";
+import { getTheme } from "../utils/utils";
+
 
 export const useDarkModeStore = create((set, get) => ({
-  mode: JSON.parse(localStorage.getItem("current_user"))?.mode || "LIGHT",
+  mode: getTheme(),
   setMode: (mode) => set({ mode }),
 }));
 

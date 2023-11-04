@@ -18,8 +18,9 @@ function Profile() {
   useEffect(() => {
     getUserById(userid)
       .then((res) => {
-        if(res.data[0]){
-          setUser(res.data[0]);
+        console.log('user',res);
+        if(res){
+          setUser(res);
         }
       })
       .catch((e) => {

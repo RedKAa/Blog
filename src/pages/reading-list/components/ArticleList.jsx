@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAtom } from "jotai";
 import { totalSavesAtom } from "../atom/total-saves";
-import { getAllSavePosts, removeSave } from "../../../api/save";
+import { getAllSavePosts, removeSave, toggleSave } from "../../../api/save";
 import Article from "./article/Article";
 
 const ArticleList = ({ userId, tagId, query }) => {
@@ -10,35 +10,36 @@ const ArticleList = ({ userId, tagId, query }) => {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
   const [_, setTotalSaves] = useAtom(totalSavesAtom);
-  // useEffect(() => {
-  //   getAllSavePosts(tagId, query)
-  //     .then((res) => {
-  //       if (res.status === 200) {
-  //         setPosts(res.data);
-  //         setTotalSaves(res.data.length);
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // }, [userId, tagId, query]);
+  useEffect(() => {
+    getAllSavePosts(tagId, query)
+      .then((res) => {
+        console.log('spost',res);
+        if (res.status === 200) {
+          setPosts(res.data.data);
+          setTotalSaves(res.data.data.length);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [userId, tagId, query]);
 
   const onDeleteSave = (saveId) => {
-    // removeSave(saveId)
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       setPosts((prevPosts) => {
-    //         return prevPosts.filter((post) => post.saveId !== saveId);
-    //       });
-    //     }
+    toggleSave(saveId)
+      .then((res) => {
+        if (res.status === 200) {
+          setPosts((prevPosts) => {
+            return prevPosts.filter((post) => post.id !== saveId);
+          });
+        }
 
-    //     if (res.response?.status === 400) {
-    //       throw res.response?.data?.message;
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
+        if (res.response?.status === 400) {
+          throw res.response?.data?.message;
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     console.log('delete ',saveId);
   };
   return (

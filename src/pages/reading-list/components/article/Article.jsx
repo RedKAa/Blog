@@ -5,13 +5,14 @@ import * as S from "./styles";
 import { format } from "date-fns";
 import { Fragment } from "react";
 import { USER_DEFAULT_IMG } from "../../../../utils/utils";
+import moment from "moment";
 const { Title, Text } = Typography;
 
 const Article = ({ post, onDelete }) => {
   return (
     <S.Card>
       <S.CardWrapper>
-        <Link to={`/${post.author?.username}`} style={{ display: "block" }}>
+        <Link to={`/user/${post.author.id}`} style={{ display: "block" }}>
           <S.CardImage
            src={`${(post.author.avatarLink && post.author.avatarLink.length > 20)
             ? `${post.author.avatarLink}`
@@ -22,27 +23,27 @@ const Article = ({ post, onDelete }) => {
           />
         </Link>
         <S.CardContent>
-          <S.CardTitle to={`/${post.author?.username}/${post.slug}`}>
+          <S.CardTitle to={`/post/${post.slug}`}>
             <S.Title level={4}>{post.title}</S.Title>
           </S.CardTitle>
 
           <S.CardDetails>
-            <Link to={`/${post.author?.username}`}>
+            <Link to={`/user/${post.id}`}>
               <S.Text>
-                {post.author?.firstName} {post.author?.lastName}
+                {post.author.userName}
               </S.Text>
             </Link>
             <S.Dot> • </S.Dot>
             <S.Time dateTime={post.createdAt}>
-              {format(new Date(post.createdAt || Date.now()), "MMM d,y")}
+              {moment(post.createdAt).format('HH:mm DD-MM-YYYY')}
             </S.Time>
 
             <span className="tags">
               {post.tags?.map((t) => {
                 return (
-                  <Fragment key={t.tag.id}>
+                  <Fragment key={t.id}>
                     <S.Dot> • </S.Dot>
-                    <S.Tag to={`/t/${t.tag.id}`}>{t.tag.name}</S.Tag>
+                    <S.Tag to={`/t/${t.id}`}>{t.name}</S.Tag>
                   </Fragment>
                 );
               })}
@@ -54,7 +55,7 @@ const Article = ({ post, onDelete }) => {
         size="large"
         type="link"
         danger
-        onClick={() => onDelete(post.saveId)}
+        onClick={() => onDelete(post.id)}
       >
         Remove
       </Button>

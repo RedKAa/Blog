@@ -10,12 +10,12 @@ const LeftSidebar = () => {
           Profile
         </S.Text>
       </S.NavLinkWrapper>
-      <S.NavLinkWrapper to="account">
+      {/* <S.NavLinkWrapper to="account">
         <S.Text>
           <LockOutlined />
           Account
         </S.Text>
-      </S.NavLinkWrapper>
+      </S.NavLinkWrapper> */}
       <S.NavLinkWrapper to="customization">
         <S.Text>
           <SettingOutlined />
