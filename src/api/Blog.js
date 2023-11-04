@@ -26,7 +26,8 @@ export const getBlogs = (p = 1, filters) => {
   return request.get('/posts', {
     params: {
       page: p,
-      ...filters
+      ...filters,
+      orderBy: 'createAt-desc'
     },
     useCache: true,
   });

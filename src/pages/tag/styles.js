@@ -1,12 +1,20 @@
 import { Typography } from "antd";
 import styled from "styled-components";
 
+const getBorderColor = (status) => {
+  if (status === 'Disable') {
+    return '#C0C0C0'; // Disable color
+  } else {
+    return '#00FF00'; // Active color
+  }
+};
+
 export const Tag = styled.div``;
 
 export const Header = styled.header`
   background-color: ${(props) => props.theme.cardBg};
   padding: 12px;
-  border-top: 16px solid #2965f1;
+  border-top: 16px solid ${(props) => getBorderColor(props.subjectStatus)};
   margin-bottom: 8px;
   margin-bottom: 24px;
   border-radius: 8px;

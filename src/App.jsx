@@ -26,6 +26,7 @@ import ReadingList from "./pages/reading-list";
 import ForgotPassword from "./pages/forgot-password";
 import ResetPassword from "./pages/reset-password";
 import ProtectedRoute  from "./components/Routers/ProtectedRoute";
+import Video from "./pages/home copy";
 
 function App() {
   const mode = useDarkModeStore((state) => state.mode);
@@ -58,6 +59,8 @@ function App() {
             <Route path="readinglist" element={<ReadingList />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset-password" element={<ResetPassword />} />
+            <Route path="videos" element={<Video />} />
+
 
           </Route>
         </Route>

@@ -16,7 +16,7 @@ function Tag() {
   useEffect(() => {
     getTag(tagId)
       .then((res) => {
-        setTag(res.data);
+        setTag(res);
       })
       .catch((e) => {
         console.log(e);
@@ -24,7 +24,7 @@ function Tag() {
 
       allBlogByTag(tagId)
       .then((res) => {
-        setNbrPosts(res?.data?.total);
+        setNbrPosts(res?.total);
       })
       .catch((e) => {
         console.log(e);

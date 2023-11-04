@@ -9,13 +9,13 @@ import styled from "styled-components";
 import ArticleList from "./components/ArticleList";
 import { Link } from "react-router-dom";
 
-const HomeContainer = styled.div`
+const VideoContainer = styled.div`
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
   column-gap: 20px;
 `;
 
-const HomeSidebar = styled.aside``;
+const VideoSidebar = styled.aside``;
 const SidebarLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@ const SidebarLink = styled(Link)`
   }
 `;
 
-const HomeMain = styled.main`
+const VideoMain = styled.main`
   header nav ul {
     display: flex;
     gap: 16px;
@@ -55,11 +55,11 @@ const SecondaryNavLink = styled(Link)`
   }
 `;
 
-const Home = () => {
+const Video = () => {
   return (
     <Container>
-      <HomeContainer>
-        <HomeSidebar>
+      <VideoContainer>
+        <VideoSidebar>
           <nav>
             <ul>
               <li>
@@ -70,42 +70,10 @@ const Home = () => {
                   Home
                 </SidebarLink>
               </li>
-              <li>
-                <SidebarLink to="readinglist">
-                  <span>
-                    {/* <img src={readingListIcon} alt="reading list icon" /> */}
-                  </span>
-                  Reading List
-                </SidebarLink>
-              </li>
-              <li>
-                <SidebarLink to="videos">
-                  <span>
-                    {/* <img src={tagIcon} alt="tags icon" /> */}
-                  </span>
-                  Videos
-                </SidebarLink>
-              </li>
-              <li>
-                <SidebarLink to="subjects">
-                  <span>
-                    {/* <img src={tagIcon} alt="tags icon" /> */}
-                  </span>
-                  Subjects
-                </SidebarLink>
-              </li>
-              <li>
-                <SidebarLink to="tags">
-                  <span>
-                    {/* <img src={tagIcon} alt="tags icon" /> */}
-                  </span>
-                  Tags
-                </SidebarLink>
-              </li>
             </ul>
           </nav>
-        </HomeSidebar>
-        <HomeMain>
+        </VideoSidebar>
+        <VideoMain>
           <header style={{ marginBottom: "12px" }}>
             <nav>
               <ul>
@@ -128,10 +96,10 @@ const Home = () => {
             </nav>
           </header>
           <ArticleList />
-        </HomeMain>
-      </HomeContainer>
+        </VideoMain>
+      </VideoContainer>
     </Container>
   );
 };
 
-export default Home;
+export default Video;
