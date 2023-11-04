@@ -11,9 +11,14 @@ const Sidebar = ({ userId }) => {
   useEffect(() => {
     getAllTagsOfSaves()
       .then((res) => {
-        console.log('tags',res);
         if (res.status === 200) {
-          setTags(res.data);
+          let tmp = res.data.filter((value, index, self) =>
+          index === self.findIndex((t) => (
+            t.id === value.id
+          ))
+          )
+          console.log(tmp);
+          setTags(tmp);
         }
       })
       .catch((e) => {

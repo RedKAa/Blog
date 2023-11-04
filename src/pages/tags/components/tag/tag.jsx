@@ -4,7 +4,7 @@ import * as S from "./styles";
 
 const tag = forwardRef(({ tag }, ref) => {
   return (
-    <S.Tag ref={ref}>
+    <S.Tag ref={ref} subjectStatus={tag.status}>
       <S.TitleLink to={`/t/${tag.id}`}>
         <S.Title level={3}>
           <S.Prefix>#</S.Prefix>
@@ -16,7 +16,7 @@ const tag = forwardRef(({ tag }, ref) => {
           <S.Prefix>- </S.Prefix>
           {tag.subject.name}
 
-          {tag.subject.status === 'Disable' ? ' - not active at FPTU' : ''}
+          {/* {tag.subject.status === 'Disable' ? ' - not active at FPTU' : ''} */}
 
         </S.Title>
       </S.TitleLink>

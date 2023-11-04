@@ -2,12 +2,20 @@ import styled from "styled-components";
 import { Typography } from "antd";
 import { Link } from "react-router-dom";
 import { device } from "../../../../utils/device";
+
+const getBorderColor = (status) => {
+  if (status === 'Disable') {
+    return '#C0C0C0'; // Disable color
+  } else {
+    return '#00FF00'; // Active color
+  }
+};
 export const Tag = styled.div`
   padding: 24px;
   background-color: ${(props) => props.theme.cardBg};
   border-radius: 8px;
   box-shadow: 0 0 0 1px ${(props) => props.theme.cardBorder};
-  border-top: 16px solid #2965f1;
+  border-top: 16px solid ${(props) => getBorderColor(props.subjectStatus)};
   margin-bottom: 16px;
 
   @media ${device.md} {
