@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import Footer from "./Footer";
-import Navbar from "./navbar/Navbar";
+import NavBar from "./navbar/NavBar";
 
 const LayoutWrapper = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const Layout = () => {
     <>
       <LayoutWrapper>
         <Wrapper>
-          <Navbar />
+          <NavBar />
           <Outlet />
         </Wrapper>
 
