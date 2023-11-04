@@ -14,6 +14,11 @@ export default function useBlogs(pageNumber, authorId) {
         if (Object.keys(res.data).length === 0) return;
         let { total, pageSize, current, data } = res;
         setPosts((prevBlogs) => {
+          if(prevBlogs.length) {
+            if(prevBlogs[0].authorId != authorId) {
+              prevBlogs = [];
+            }
+          }
           return [
             ...new Map(
               [...prevBlogs, ...data].map((blog) => [blog["id"], blog])
