@@ -24,8 +24,14 @@ auth.useDeviceLanguage();
 const loginGoogle = async () => {
   const result = await signInWithPopup(auth, provider);
   const token = result?.user?.accessToken;
-  if (token) {
-    return token;
+  const email = result?.user?.email;
+  if (email && token) {
+    if(email.includes('@fpt.edu.vn') || email.includes('@fe.edu.vn')) {
+      return token;
+    }
+    else {
+      return 'email_not_acceptable';
+    }
   }
   return '';
 };

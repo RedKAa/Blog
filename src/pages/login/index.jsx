@@ -22,14 +22,16 @@ function Login() {
   const setUser = useUserStore((state) => state.setUser);
   const authUser = useUserStore((state) => state.user);
   const setMode = useDarkModeStore((state) => state.setMode);
+  const [emailError, setEmailErr] = useState(false);
 
   const navigate = useNavigate();
   const { state: locationState } = useLocation();
 
   const handleLoginGoogle = async () => {
     try {
+      setEmailErr(false);
       const accessToken = await loginGoogle();
-      if (accessToken) {
+      if (accessToken && accessToken != 'email_not_acceptable') {
         const res = await loginfirebase({token: accessToken});
         if (res) {
           setAppToken(res.data);
@@ -49,6 +51,9 @@ function Login() {
           return;
         }
       }
+      else if (accessToken == 'email_not_acceptable'){
+        setEmailErr(true);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -57,6 +62,20 @@ function Login() {
   return (
     <div className="login">
       <Container>
+        {emailError && <Row justify="center">
+          <Col md={14}>
+            <Paragraph
+                  style={{
+                    textAlign: "center",
+                    fontSize: "16px",
+                    fontWeight: "500",
+                    color: "red",
+                  }}
+                >
+                  Please use FPTU account to login!
+              </Paragraph>
+          </Col>
+        </Row>}
         <Row justify="center">
           <Col md={14}>
             <Card className="login__card">

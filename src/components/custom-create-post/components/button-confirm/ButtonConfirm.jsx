@@ -5,6 +5,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
 import { useUserStore } from "../../../../store/user";
+import { getUserInfo } from "../../../../utils/utils";
 
 const Button = styled(ButtonAnt)`
   && {
@@ -17,7 +18,7 @@ const Button = styled(ButtonAnt)`
 `;
 
 const ButtonConfirm = () => {
-  const authUser = useUserStore((state) => state.user);
+  const authUser = getUserInfo();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ const ButtonConfirm = () => {
       <Modal
         title="You have unsaved changes"
         open={open}
-        onOk={() => navigate(`/${authUser.username}`)}
+        onOk={() => navigate(`/user/${authUser.id}`)}
         onCancel={() => setOpen(false)}
         okButtonProps={{
           className: "ant-btn-dangerous",
