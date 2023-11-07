@@ -34,8 +34,8 @@ const Article = ({ post, onDelete }) => {
               </S.Text>
             </Link>
             <S.Dot> • </S.Dot>
-            <S.Time dateTime={post.createdAt}>
-              {moment(post.createdAt).format('HH:mm DD-MM-YYYY')}
+            <S.Time dateTime={post.createAt}>
+              {moment(post.createAt).format('HH:mm DD-MM-YYYY')}
             </S.Time>
 
             <span className="tags">

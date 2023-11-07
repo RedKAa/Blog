@@ -29,9 +29,9 @@ const SidebarRight = ({ author }) => {
               <li>
                 <S.Key>Joined</S.Key>
                 <S.Value>
-                  <time dateTime={author?.createdAt}>
+                  <time dateTime={author?.createAt}>
                     {format(
-                      new Date(author?.createdAt || Date.now()),
+                      new Date(author?.createAt || Date.now()),
                       "MMM d, y"
                     )}
                   </time>

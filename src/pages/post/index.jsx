@@ -105,7 +105,7 @@ const Post = () => {
                     <S.PublishDate>
                       Posted on{" "}
                       {format(
-                        new Date(post.createdAt || Date.now()),
+                        new Date(post.createAt || Date.now()),
                         "MMM d, y"
                       )}
                     </S.PublishDate>

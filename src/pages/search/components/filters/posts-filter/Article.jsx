@@ -10,7 +10,7 @@ import "../../../../profile/components/article/article.css";
 
 const { Title, Text } = Typography;
 const Article = React.forwardRef(({ post }, ref) => {
-  const { title, createdAt, author, tags } = post;
+  const { title, createAt, author, tags } = post;
   return (
     <div ref={ref} className="story">
       <article className="story__body">
@@ -29,8 +29,8 @@ const Article = React.forwardRef(({ post }, ref) => {
               {author.userName}
             </Title>
             <Text>
-              <time dateTime={createdAt}>
-                {format(new Date(createdAt), "MMM d, y")}
+              <time dateTime={createAt}>
+                {format(new Date(createAt), "MMM d, y")}
               </time>
             </Text>
           </div>

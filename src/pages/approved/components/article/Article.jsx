@@ -13,7 +13,7 @@ import { USER_DEFAULT_IMG } from "../../../../utils/utils";
 
 const { Title, Text } = Typography;
 const Article = React.forwardRef(({ post }, ref) => {
-  const { id, title, createdAt, author, tags } = post;
+  const { id, title, createAt, author, tags } = post;
   return (
     <div ref={ref} className="story">
       <article className="story__body">
@@ -32,7 +32,7 @@ const Article = React.forwardRef(({ post }, ref) => {
               {author.userName}
             </Title>
             <Text>
-              {moment(createdAt).format('HH:mm DD-MM-YYYY')}
+              Posted on {moment(createAt).format('DD-MM-YYYY')}
             </Text>
           </div>
         </div>

@@ -153,7 +153,7 @@ const SaveButton = styled.button`
 `;
 
 const PreviewPost = React.forwardRef(({ post }, ref) => {
-  const { id, title, author, tags, slug, createdAt, cover } = post;
+  const { id, title, author, tags, slug, createAt, cover } = post;
 
   return (
     <PreviewContainer ref={ref}>
@@ -177,7 +177,7 @@ const PreviewPost = React.forwardRef(({ post }, ref) => {
               </Title>
             </PreviewTopTitleLink>
             <PreviewTopDate>
-              {moment(createdAt).format('HH:mm DD-MM-YYYY')}
+              Posted on {moment(createAt).format('DD-MM-YYYY')}
             </PreviewTopDate>
           </div>
         </PreviewTop>
