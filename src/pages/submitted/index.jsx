@@ -10,13 +10,13 @@ import ArticleList from "./components/ArticleList";
 import { Link } from "react-router-dom";
 import { getUserInfo } from "../../utils/utils";
 
-const ApprovedContainer = styled.div`
+const SubmittedContainer = styled.div`
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
   column-gap: 20px;
 `;
 
-const ApprovedSidebar = styled.aside``;
+const SubmittedSidebar = styled.aside``;
 const SidebarLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ const SidebarLink = styled(Link)`
   }
 `;
 
-const ApprovedMain = styled.main`
+const SubmittedMain = styled.main`
   header nav ul {
     display: flex;
     gap: 16px;
@@ -56,13 +56,13 @@ const SecondaryNavLink = styled(Link)`
   }
 `;
 
-const Approved = () => {
+const Submitted = () => {
   const authUser = getUserInfo();
   const role = authUser?.role;
   return (
     <Container>
-      <ApprovedContainer>
-        <ApprovedSidebar>
+      <SubmittedContainer>
+        <SubmittedSidebar>
           <nav>
             <ul>
               <li>
@@ -75,8 +75,8 @@ const Approved = () => {
               </li>
             </ul>
           </nav>
-        </ApprovedSidebar>
-        <ApprovedMain>
+        </SubmittedSidebar>
+        <SubmittedMain>
           <header style={{ marginBottom: "12px" }}>
             <nav>
               <ul>
@@ -99,10 +99,10 @@ const Approved = () => {
             </nav>
           </header>
           <ArticleList />
-        </ApprovedMain>
-      </ApprovedContainer>
+        </SubmittedMain>
+      </SubmittedContainer>
     </Container>
   );
 };
 
-export default Approved;
+export default Submitted;

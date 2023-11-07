@@ -15,7 +15,7 @@ import {
 } from './utils';
 
 const codeMessage = {
-  200: 'Thực hiện thành công.',
+  200: 'Action successful...',
   201: 'Tạo thành công',
   202: '一个请求已经进入后台排队（异步任务）。',
   204: '删除数据成功。',

@@ -11,7 +11,7 @@ export default function useBlogs(pageNumber) {
   useEffect(() => {
     setLoading(true);
     setError(false);
-    getBlogs(pageNumber, {postStatus:'Publish', approverId: authUser.id, orderBy: 'updateAt-des'})
+    getBlogs(pageNumber, {postStatus:'Draft', AuthorId: authUser.id, orderBy: 'createAt-des'})
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
         let { total,current,pageSize, data } = res;

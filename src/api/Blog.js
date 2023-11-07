@@ -26,8 +26,7 @@ export const getBlogs = (p = 1, filters) => {
   return request.get('/posts', {
     params: {
       page: p,
-      ...filters,
-      orderBy: 'createAt-desc'
+      ...filters
     },
     useCache: true,
   });
@@ -170,6 +169,7 @@ export const allBlogByTag = (id) => {
   return request.get(`/posts`, {
     params: {
       tagId: id,
+      postStatus: 'Publish',
     },
   });
 };

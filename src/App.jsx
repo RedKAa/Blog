@@ -29,6 +29,10 @@ import ProtectedRoute  from "./components/Routers/ProtectedRoute";
 import Video from "./pages/home copy";
 import Request from "./pages/requests";
 import Approved from "./pages/approved";
+import RejectedList from "./pages/rejected-list";
+import Published from "./pages/published";
+import Submitted from "./pages/submitted";
+import Rejected from "./pages/rejected";
 
 function App() {
   const mode = useDarkModeStore((state) => state.mode);
@@ -62,9 +66,18 @@ function App() {
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset-password" element={<ResetPassword />} />
             <Route path="videos" element={<Video />} />
+            <Route path="published" element={<Published />} />
+          </Route>
+
+          <Route element={<ProtectedRoute acceptedRoles={['Teacher']} />}>
             <Route path="requests" element={<Request />} />
             <Route path="approved" element={<Approved />} />
-            <Route path="videos" element={<Video />} />
+            <Route path="rejected-list" element={<RejectedList/>} />
+
+          </Route>
+          <Route element={<ProtectedRoute acceptedRoles={['Student']} />}>
+            <Route path="submitted" element={<Submitted />} />
+            <Route path="rejected" element={<Rejected />} />
           </Route>
         </Route>
 

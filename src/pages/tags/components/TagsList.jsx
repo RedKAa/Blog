@@ -1,8 +1,9 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import useTags from "../hooks/useTags";
 import Tag from "./tag/tag";
 import styled from "styled-components";
 import { device } from "../../../utils/device";
+import ListLoading from "../../../components/LoadingList";
 const StyledTagList = styled.section`
   @media ${device.md} {
     display: grid;
@@ -21,6 +22,8 @@ const TagsList = ({ q, pageNumberState }) => {
   const { loading, tags, error, hasMore } = useTags(pageNumber, q);
 
   const observer = useRef();
+  const [loadske, setloadske] = useState(true);
+
   const lastTagElementRef = useCallback(
     (node) => {
       if (loading) return;
@@ -32,12 +35,15 @@ const TagsList = ({ q, pageNumberState }) => {
       });
 
       if (node) observer.current.observe(node);
+      setloadske(loading);
+
     },
     [loading, hasMore]
   );
   console.log('tag:',tags);
   return (
     <StyledTagList>
+      <ListLoading loading={loadske} length={4}/>
       {tags.map((tag, index) => {
         if (tags.length === index + 1) {
           return <Tag key={tag.id} ref={lastTagElementRef} tag={tag} />;

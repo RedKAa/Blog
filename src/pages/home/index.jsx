@@ -105,16 +105,6 @@ const Home = () => {
                   Tags
                 </SidebarLink>
               </li>
-              {role == 'Teacher' && <li>
-                <SidebarLink to="requests">
-                  Request Approval
-                </SidebarLink>
-              </li>}
-              {role == 'Teacher' && <li>
-                <SidebarLink to="approved">
-                  Approved / Rejected
-                </SidebarLink>
-              </li>}
             </ul>
           </nav>
         </HomeSidebar>
@@ -123,7 +113,7 @@ const Home = () => {
             <nav>
               <ul>
                 <li>
-                  <SecondaryNavLink $active={true} to="/latest">
+                  <SecondaryNavLink $active={true} to="#">
                     Latest
                   </SecondaryNavLink>
                 </li>

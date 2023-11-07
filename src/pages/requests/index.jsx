@@ -81,7 +81,7 @@ const Request = () => {
             <nav>
               <ul>
                 <li>
-                  <SecondaryNavLink $active={true} to="/latest">
+                  <SecondaryNavLink $active={true} to="#">
                     Latest
                   </SecondaryNavLink>
                 </li>

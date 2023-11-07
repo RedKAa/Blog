@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import parse from "html-react-parser";
 import { format } from "date-fns";
@@ -14,7 +14,8 @@ import SidebarRight from "./components/sidebar-right/SidebarRight";
 import * as S from "./styles";
 import SidebarLeft from "./components/sidebar-left/SidebarLeft";
 import { USER_DEFAULT_IMG, getUserInfo } from "../../utils/utils";
-import { Button, Tag } from "antd";
+import { Button, Skeleton, Tag } from "antd";
+import ListLoading from "../../components/LoadingList";
 
 const Post = () => {
   const { slug } = useParams();
@@ -24,26 +25,37 @@ const Post = () => {
   const [error, setError] = useState(null);
   const authUser = getUserInfo();
   const role = authUser?.role;
+  const navigate = useNavigate();
+
+  function refresh() {
+    setTimeout(() => {
+      navigate(0);
+    }, 500);
+  }
 
   const handleApprove = () => {
     updateBlog(post.id, {postStatus: 'Publish', approverId: authUser.id})
       .then((res) => {
         console.log(res);
         setStatus("resolved");
+        refresh();
       })
       .catch((e) => {
         setStatus("rejected");
+        // navigate(0);
       });
   }
 
   const handleReject = () => {
-    updateBlog(post.id, {postStatus: 'Reject', approverId: authUser.id})
+    updateBlog(post.id, {postStatus: 'Rejected', approverId: authUser.id})
       .then((res) => {
         console.log(res);
         setStatus("resolved");
+        refresh();
       })
       .catch((e) => {
         setStatus("rejected");
+        // navigate(0);
     });
   }
 
@@ -65,11 +77,8 @@ const Post = () => {
   if (status === "resolved") {
     return (
       <S.Layout>
-        {status === "resolved" && (
           <SidebarLeft postId={post.id} commentsCount={post.comments?.length} />
-        )}
-
-        <S.Content>
+          <S.Content>
           <S.Article>
             {post.cover && (
               <S.Cover
@@ -109,7 +118,7 @@ const Post = () => {
                 {authUser?.id === post.author?.id && post.postStatus && post.postStatus == 'Publish' && (
                    <Tag color="green">Published</Tag>
                 )}
-                 {authUser?.id === post.author?.id && post.postStatus && post.postStatus == 'Reject' && (
+                 {authUser?.id === post.author?.id && post.postStatus && post.postStatus == 'Rejected' && (
                    <Tag color="red">Rejected</Tag>
                 )}
 
@@ -133,7 +142,7 @@ const Post = () => {
                      </Button>}
 
                       {/* adjust approval */}
-                     {(authUser?.id === post.approver?.id && post.postStatus == 'Reject') && <Button onClick={handleApprove} type="primary" style={{marginRight: '10px'}}>
+                     {(authUser?.id === post.approver?.id && post.postStatus == 'Rejected') && <Button onClick={handleApprove} type="primary" style={{marginRight: '10px'}}>
                         Approve
                       </Button>}
                       {(authUser?.id === post.approver?.id && post.postStatus == 'Publish') && <Button onClick={handleReject} danger>

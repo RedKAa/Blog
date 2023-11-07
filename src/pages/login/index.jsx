@@ -3,6 +3,7 @@ import {
   Card,
   Col,
   Row,
+  Spin,
   Typography
 } from "antd";
 import { useState } from "react";
@@ -23,6 +24,8 @@ function Login() {
   const authUser = useUserStore((state) => state.user);
   const setMode = useDarkModeStore((state) => state.setMode);
   const [emailError, setEmailErr] = useState(false);
+  const [loadske, setloadske] = useState(false);
+
 
   const navigate = useNavigate();
   const { state: locationState } = useLocation();
@@ -30,6 +33,7 @@ function Login() {
   const handleLoginGoogle = async () => {
     try {
       setEmailErr(false);
+      setloadske(true);
       const accessToken = await loginGoogle();
       if (accessToken && accessToken != 'email_not_acceptable') {
         const res = await loginfirebase({token: accessToken});
@@ -55,6 +59,7 @@ function Login() {
         setEmailErr(true);
       }
     } catch (error) {
+      setloadske(false);
       console.log(error.message);
     }
   };
@@ -74,6 +79,13 @@ function Login() {
                 >
                   Please use FPTU account to login!
               </Paragraph>
+          </Col>
+        </Row>}
+        {loadske && <Row justify="center">
+          <Col md={14} style={{marginBottom: '100px'}}>
+              <Spin tip="Loading" size="large">
+                <div className="content" />
+              </Spin>
           </Col>
         </Row>}
         <Row justify="center">

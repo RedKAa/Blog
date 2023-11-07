@@ -9,7 +9,7 @@ export default function useBlogs(pageNumber, tagId) {
   useEffect(() => {
     setLoading(true);
     setError(false);
-    getBlogs(pageNumber, { tagId: tagId })
+    getBlogs(pageNumber, { tagId: tagId,  postStatus: 'Publish', orderBy: 'updateAt-desc'})
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
         let { total, pageSize, current, data } = res;

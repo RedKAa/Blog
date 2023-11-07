@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Menu, Drawer, Avatar, Input, Image } from "antd";
 import {
+  AuditOutlined,
+  ContainerOutlined,
+  FileDoneOutlined,
+  FileExcelOutlined,
   LogoutOutlined,
   MenuOutlined,
   PlusCircleOutlined,
@@ -39,6 +43,78 @@ function NavBar() {
 
   useEffect(() => {
     if (authUser) {
+      let actions = [];
+      if(authUser.role === "Teacher") {
+        actions= [
+          {
+            label: (
+              <Link to="requests">
+                <ContainerOutlined style={{ marginRight: "8px" }} />
+                Request Approval
+              </Link>
+            ),
+            key: "request-post",
+          },
+          {
+            label: (
+              <Link to="approved">
+                <AuditOutlined style={{ marginRight: "8px" }} />
+                Approved
+              </Link>
+            ),
+            key: "approved-post",
+          },
+          {
+            label: (
+              <Link to="rejected-list">
+                <FileExcelOutlined style={{ marginRight: "8px" }} />
+                Rejected
+              </Link>
+            ),
+            key: "rejected-post",
+          },
+          {
+            label: (
+              <Link to="published">
+                <FileDoneOutlined style={{ marginRight: "8px" }} />
+                Published Post
+              </Link>
+            ),
+            key: "published-post",
+          },
+        ]
+      }
+      if(authUser.role === "Student") {
+        actions= [
+          {
+            label: (
+              <Link to="submitted">
+                <PlusCircleOutlined style={{ marginRight: "8px" }} />
+                Submitted Post
+              </Link>
+            ),
+            key: "submitted-post",
+          },
+          {
+            label: (
+              <Link to="published">
+                <FileDoneOutlined style={{ marginRight: "8px" }} />
+                Published Post
+              </Link>
+            ),
+            key: "published-post",
+          },
+          {
+            label: (
+              <Link to="rejected">
+                <FileExcelOutlined style={{ marginRight: "8px" }} />
+                Rejected Post
+              </Link>
+            ),
+            key: "rejected-post",
+          },
+        ]
+      }
       setAuthMenu([
         {
           key: "auth1",
@@ -70,6 +146,7 @@ function NavBar() {
               ),
               key: "create-post",
             },
+            ...actions,
             {
               label: (
                 <Link to="/settings">

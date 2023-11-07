@@ -1,15 +1,17 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useAtom } from "jotai";
 import PreviewPost from "components/preview-post/PreviewPost";
 import useBlogs from "../../../hooks/useBlogs";
 import { pageNumberAtom } from "../../../store/page-number";
 import { Empty } from "antd";
+import ListLoading from "../../../../../components/LoadingList";
 
 function PostsFilter({ q }) {
   const [pageNumber, setPageNumber] = useAtom(pageNumberAtom);
   const { loading, error, posts, hasMore } = useBlogs(pageNumber, q);
-
   const observer = useRef();
+  const [loadske, setloadske] = useState(true);
+
   const lastPostElementRef = useCallback(
     (node) => {
       if (loading) return;
@@ -21,12 +23,16 @@ function PostsFilter({ q }) {
       });
 
       if (node) observer.current.observe(node);
+      setloadske(loading);
+
     },
     [loading, hasMore, setPageNumber]
   );
 
   return (
     <section className="list-posts">
+      <ListLoading loading={loadske} length={4}/>
+
       {posts.map((post, index) => {
         if (posts.length === index + 1) {
           return (
