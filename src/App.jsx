@@ -28,6 +28,7 @@ import ResetPassword from "./pages/reset-password";
 import ProtectedRoute  from "./components/Routers/ProtectedRoute";
 import Video from "./pages/home copy";
 import Request from "./pages/requests";
+import Approved from "./pages/approved";
 
 function App() {
   const mode = useDarkModeStore((state) => state.mode);
@@ -62,6 +63,7 @@ function App() {
             <Route path="reset-password" element={<ResetPassword />} />
             <Route path="videos" element={<Video />} />
             <Route path="requests" element={<Request />} />
+            <Route path="approved" element={<Approved />} />
             <Route path="videos" element={<Video />} />
           </Route>
         </Route>

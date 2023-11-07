@@ -10,13 +10,13 @@ import ArticleList from "./components/ArticleList";
 import { Link } from "react-router-dom";
 import { getUserInfo } from "../../utils/utils";
 
-const HomeContainer = styled.div`
+const ApprovedContainer = styled.div`
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
   column-gap: 20px;
 `;
 
-const HomeSidebar = styled.aside``;
+const ApprovedSidebar = styled.aside``;
 const SidebarLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ const SidebarLink = styled(Link)`
   }
 `;
 
-const HomeMain = styled.main`
+const ApprovedMain = styled.main`
   header nav ul {
     display: flex;
     gap: 16px;
@@ -56,13 +56,13 @@ const SecondaryNavLink = styled(Link)`
   }
 `;
 
-const Home = () => {
+const Approved = () => {
   const authUser = getUserInfo();
   const role = authUser?.role;
   return (
     <Container>
-      <HomeContainer>
-        <HomeSidebar>
+      <ApprovedContainer>
+        <ApprovedSidebar>
           <nav>
             <ul>
               <li>
@@ -70,7 +70,7 @@ const Home = () => {
                   <span>
                     {/* <img src={homeIcon} alt="home icon" /> */}
                   </span>
-                  Home
+                  Approved
                 </SidebarLink>
               </li>
               <li>
@@ -112,13 +112,13 @@ const Home = () => {
               </li>}
               {role == 'Teacher' && <li>
                 <SidebarLink to="approved">
-                  Approved / Rejected
+                Approved / Rejected
                 </SidebarLink>
               </li>}
             </ul>
           </nav>
-        </HomeSidebar>
-        <HomeMain>
+        </ApprovedSidebar>
+        <ApprovedMain>
           <header style={{ marginBottom: "12px" }}>
             <nav>
               <ul>
@@ -141,10 +141,10 @@ const Home = () => {
             </nav>
           </header>
           <ArticleList />
-        </HomeMain>
-      </HomeContainer>
+        </ApprovedMain>
+      </ApprovedContainer>
     </Container>
   );
 };
 
-export default Home;
+export default Approved;
