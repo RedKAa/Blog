@@ -10,13 +10,13 @@ import ArticleList from "./components/ArticleList";
 import { Link } from "react-router-dom";
 import { getUserInfo } from "../../utils/utils";
 
-const HomeContainer = styled.div`
+const RequestContainer = styled.div`
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
   column-gap: 20px;
 `;
 
-const HomeSidebar = styled.aside``;
+const RequestSidebar = styled.aside``;
 const SidebarLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ const SidebarLink = styled(Link)`
   }
 `;
 
-const HomeMain = styled.main`
+const RequestMain = styled.main`
   header nav ul {
     display: flex;
     gap: 16px;
@@ -56,13 +56,13 @@ const SecondaryNavLink = styled(Link)`
   }
 `;
 
-const Home = () => {
+const Request = () => {
   const authUser = getUserInfo();
   const role = authUser?.role;
   return (
     <Container>
-      <HomeContainer>
-        <HomeSidebar>
+      <RequestContainer>
+        <RequestSidebar>
           <nav>
             <ul>
               <li>
@@ -73,52 +73,10 @@ const Home = () => {
                   Home
                 </SidebarLink>
               </li>
-              <li>
-                <SidebarLink to="readinglist">
-                  <span>
-                    {/* <img src={readingListIcon} alt="reading list icon" /> */}
-                  </span>
-                  Reading List
-                </SidebarLink>
-              </li>
-              <li>
-                <SidebarLink to="videos">
-                  <span>
-                    {/* <img src={tagIcon} alt="tags icon" /> */}
-                  </span>
-                  Videos
-                </SidebarLink>
-              </li>
-              <li>
-                <SidebarLink to="subjects">
-                  <span>
-                    {/* <img src={tagIcon} alt="tags icon" /> */}
-                  </span>
-                  Subjects
-                </SidebarLink>
-              </li>
-              <li>
-                <SidebarLink to="tags">
-                  <span>
-                    {/* <img src={tagIcon} alt="tags icon" /> */}
-                  </span>
-                  Tags
-                </SidebarLink>
-              </li>
-              {role == 'Teacher' && <li>
-                <SidebarLink to="requests">
-                  Request Approval
-                </SidebarLink>
-              </li>}
-              {role == 'Teacher' && <li>
-                <SidebarLink to="approves">
-                  Approved
-                </SidebarLink>
-              </li>}
             </ul>
           </nav>
-        </HomeSidebar>
-        <HomeMain>
+        </RequestSidebar>
+        <RequestMain>
           <header style={{ marginBottom: "12px" }}>
             <nav>
               <ul>
@@ -141,10 +99,10 @@ const Home = () => {
             </nav>
           </header>
           <ArticleList />
-        </HomeMain>
-      </HomeContainer>
+        </RequestMain>
+      </RequestContainer>
     </Container>
   );
 };
 
-export default Home;
+export default Request;

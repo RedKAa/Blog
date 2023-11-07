@@ -5,7 +5,7 @@ import parse from "html-react-parser";
 import { format } from "date-fns";
 
 import { useUserStore } from "../../store/user";
-import { getBlog, getPostBySlug } from "../../api/Blog";
+import { getBlog, getPostBySlug, updateBlog } from "../../api/Blog";
 
 import NewComment from "./components/new-comment/NewComment";
 import CommentsList from "./components/CommentsList";
@@ -14,6 +14,7 @@ import SidebarRight from "./components/sidebar-right/SidebarRight";
 import * as S from "./styles";
 import SidebarLeft from "./components/sidebar-left/SidebarLeft";
 import { USER_DEFAULT_IMG, getUserInfo } from "../../utils/utils";
+import { Button, Tag } from "antd";
 
 const Post = () => {
   const { slug } = useParams();
@@ -22,6 +23,29 @@ const Post = () => {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
   const authUser = getUserInfo();
+  const role = authUser?.role;
+
+  const handleApprove = () => {
+    updateBlog(post.id, {postStatus: 'Publish', approverId: authUser.id})
+      .then((res) => {
+        console.log(res);
+        setStatus("resolved");
+      })
+      .catch((e) => {
+        setStatus("rejected");
+      });
+  }
+
+  const handleReject = () => {
+    updateBlog(post.id, {postStatus: 'Reject', approverId: authUser.id})
+      .then((res) => {
+        console.log(res);
+        setStatus("resolved");
+      })
+      .catch((e) => {
+        setStatus("rejected");
+    });
+  }
 
   useEffect(() => {
     setStatus("pending");
@@ -78,6 +102,17 @@ const Post = () => {
                     </S.PublishDate>
                   </div>
                 </S.Details>
+
+                {authUser?.id === post.author?.id && post.postStatus && post.postStatus == 'Draft' && (
+                   <Tag color="magenta">Waiting for approval</Tag>
+                )}
+                {authUser?.id === post.author?.id && post.postStatus && post.postStatus == 'Publish' && (
+                   <Tag color="green">Published</Tag>
+                )}
+                 {authUser?.id === post.author?.id && post.postStatus && post.postStatus == 'Reject' && (
+                   <Tag color="red">Rejected</Tag>
+                )}
+
                 {authUser?.id === post.author?.id && (
                   <S.AuthorActions>
                     <S.EditLink
@@ -87,6 +122,25 @@ const Post = () => {
                     </S.EditLink>
                   </S.AuthorActions>
                 )}
+                {role == 'Teacher' && (
+                    <div>
+                      {/* approve new */}
+                     {(post.postStatus == 'Draft') && <Button onClick={handleApprove} type="primary" style={{marginRight: '10px'}}>
+                        Approve
+                      </Button>}
+                      {(post.postStatus == 'Draft') && <Button onClick={handleReject} danger>
+                        Reject
+                     </Button>}
+
+                      {/* adjust approval */}
+                     {(authUser?.id === post.approver?.id && post.postStatus == 'Reject') && <Button onClick={handleApprove} type="primary" style={{marginRight: '10px'}}>
+                        Approve
+                      </Button>}
+                      {(authUser?.id === post.approver?.id && post.postStatus == 'Publish') && <Button onClick={handleReject} danger>
+                        Reject
+                     </Button>}
+                     </div>
+                 )}
               </S.WrapperDetails>
               <S.Title level={2}>{post.title}</S.Title>
               <S.Tags>

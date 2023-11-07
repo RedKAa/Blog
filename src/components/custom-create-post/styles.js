@@ -78,6 +78,9 @@ export const Upload = styled(UploadAnt)`
       box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.1);
       border-radius: 6px;
     }
+    .ant-upload-list-item {
+      display: none !important;
+    }
   }
 `;
 

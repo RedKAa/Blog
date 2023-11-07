@@ -1,4 +1,4 @@
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { device } from "../../utils/device";
@@ -76,6 +76,18 @@ export const AuthorActions = styled.div`
 `;
 
 export const EditLink = styled(Link)`
+  display: inline-block;
+  color: ${(props) => props.theme.btnGhostColor};
+  background-color: ${(props) => props.theme.btnGhostBg};
+
+  border-radius: 6px;
+  padding: 6px 8px;
+
+  &:hover {
+    background-color: ${(props) => props.theme.btnGhostBgHover};
+  }
+`;
+export const TButton = styled(Button)`
   display: inline-block;
   color: ${(props) => props.theme.btnGhostColor};
   background-color: ${(props) => props.theme.btnGhostBg};
