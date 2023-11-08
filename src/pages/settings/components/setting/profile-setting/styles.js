@@ -1,5 +1,6 @@
-import { Form, Input as InputAnt, Typography, Button as ButtonAnt } from "antd";
+import { Form, Input as InputAnt, Typography, Button as ButtonAnt, Upload as UploadAnt } from "antd";
 import styled from "styled-components";
+
 
 export const ProfileSetting = styled.section`
   padding: 16px;
@@ -88,5 +89,32 @@ export const Button = styled(ButtonAnt)`
     color: ${(props) => props.theme.bodyColor};
     background-color: transparent;
     border-color: ${(props) => props.theme.base[40]};
+  }
+`;
+
+
+export const Upload = styled(UploadAnt)`
+  && {
+    .ant-upload.ant-upload-select {
+      color: ${(props) => props.theme.bodyColor};
+      background-color: transparent !important;
+      border: none !important;
+      width: auto !important;
+    }
+
+    .ant-upload.ant-upload-select > .ant-upload {
+      font-size: 16px;
+      font-weight: 500;
+      width: auto !important;
+      height: auto !important;
+      margin-top: 32px;
+      padding: 6px 12px;
+      border: 2px solid ${(props) => props.theme.base[30]};
+      box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+    }
+    .ant-upload-list-item {
+      display: none !important;
+    }
   }
 `;

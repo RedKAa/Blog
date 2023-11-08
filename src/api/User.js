@@ -55,18 +55,32 @@ export async function removeUser(id) {
   }
 }
 
-export async function updateUser(id, formData) {
-  try {
-    const response = await axios.patch(`${URL}/users/${id}`, formData);
-    return response;
-  } catch (e) {
-    return e;
-  }
+export const updateUser = (updateUser) => {
+  console.log('updateUserById', updateUser);
+  return request.put(`/users/${authUser.id}`, {
+    data: {
+      ...updateUser
+    },
+  });
 }
+
+// export async function updateUser(updateUser) {
+//   const jwtToken = getAppToken();
+//   try {
+//     const response = await axios({
+//       url: `${URL}/users/${authUser.id}`,
+//       method: "put",
+//       data: { ...updateUser },
+//       headers: { Authorization: `Bearer ${jwtToken}` },
+//     });
+//     return response;
+//   } catch (e) {
+//     return e;
+//   }
+// }
 
 export async function updateMode(mode) {
   const jwtToken = getAppToken();
-
   try {
     const response = await axios({
       url: `${URL}/users/${authUser.id}`,
