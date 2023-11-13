@@ -1,11 +1,12 @@
 import { useCallback, useRef, useState } from "react";
-import useTags from "../hooks/useTags";
-import Tag from "./tag/tag";
+import useSubjects from "../hooks/useSubjects";
+import Subject from "./subject/subject";
 import styled from "styled-components";
 import { device } from "../../../utils/device";
 import ListLoading from "../../../components/LoadingList";
+import subject from "./subject/subject";
 import { Empty } from "antd";
-const StyledTagList = styled.section`
+const StyledSubjectList = styled.section`
   @media ${device.md} {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -18,13 +19,13 @@ const StyledTagList = styled.section`
   }
 `;
 
-const TagsList = ({ q, pageNumberState }) => {
+const SubjectsList = ({ q, pageNumberState }) => {
   const [pageNumber, setPageNumber] = pageNumberState;
-  const { loading, tags, error, hasMore } = useTags(pageNumber, q);
+  const { loading, subjects, error, hasMore } = useSubjects(pageNumber, q);
 
   const observer = useRef();
 
-  const lastTagElementRef = useCallback(
+  const lastSubjectElementRef = useCallback(
     (node) => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
@@ -39,20 +40,20 @@ const TagsList = ({ q, pageNumberState }) => {
     },
     [loading, hasMore]
   );
-  console.log('tag:',tags);
+  console.log('subject:',subjects);
   return (
-    <StyledTagList>
-      {tags.map((tag, index) => {
-        if (tags.length === index + 1) {
-          return <Tag key={tag.id} ref={lastTagElementRef} tag={tag} />;
+    <StyledSubjectList>
+      {subjects.map((subject, index) => {
+        if (subjects.length === index + 1) {
+          return <Subject key={subject.id} ref={lastSubjectElementRef} subject={subject} />;
         } else {
-          return <Tag key={tag.id} tag={tag} />;
+          return <Subject key={subject.id} subject={subject} />;
         }
       })}
       <ListLoading loading={loading} length={1}/>
-      {!loading && tags.length == 0 && <Empty />}
-    </StyledTagList>
+      {!loading && subjects.length == 0 && <Empty />}
+    </StyledSubjectList>
   );
 };
 
-export default TagsList;
+export default SubjectsList;

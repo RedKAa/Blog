@@ -43,7 +43,7 @@ const Article = ({ post, onDelete }) => {
                 return (
                   <Fragment key={t.id}>
                     <S.Dot> • </S.Dot>
-                    <S.Tag to={`/t/${t.id}`}>{t.name}</S.Tag>
+                    <S.Tag to={`/tags/${t.id}`}>{t.name}</S.Tag>
                   </Fragment>
                 );
               })}

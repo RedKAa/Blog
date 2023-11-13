@@ -1,38 +1,37 @@
 import { useCallback, useRef, useState } from "react";
-import { useAtom } from "jotai";
-import PreviewPost from "components/preview-post/PreviewPost";
-import useBlogs from "../../../hooks/useBlogs";
-import { pageNumberAtom } from "../../../store/page-number";
+import useBlogs from "../hooks/useBlogs";
+import PreviewPost from "../../../components/preview-post/PreviewPost";
+import ListLoading from "../../../components/LoadingList";
 import { Empty } from "antd";
-import ListLoading from "../../../../../components/LoadingList";
 
-function PostsFilter({ q }) {
-  const [pageNumber, setPageNumber] = useAtom(pageNumberAtom);
-  const { loading, error, posts, hasMore } = useBlogs(pageNumber, q);
+const PostsListBySubject = ({ subjectId }) => {
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const { loading, error, posts, hasMore } = useBlogs(pageNumber, subjectId);
+
   const observer = useRef();
 
-  const lastPostElementRef = useCallback(
+  const lastElementPostRef = useCallback(
     (node) => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
+
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
           setPageNumber((prevPageNumber) => prevPageNumber + 1);
         }
       });
-
       if (node) observer.current.observe(node);
 
     },
-    [loading, hasMore, setPageNumber]
+    [loading, hasMore]
   );
-
   return (
-    <section className="list-posts">
+    <div>
       {posts.map((post, index) => {
         if (posts.length === index + 1) {
           return (
-            <PreviewPost key={post.id} ref={lastPostElementRef} post={post} />
+            <PreviewPost key={post.id} ref={lastElementPostRef} post={post} />
           );
         } else {
           return <PreviewPost key={post.id} post={post} />;
@@ -40,8 +39,8 @@ function PostsFilter({ q }) {
       })}
       <ListLoading loading={loading} length={4}/>
       {!loading && posts.length == 0 && <Empty />}
-    </section>
+    </div>
   );
-}
+};
 
-export default PostsFilter;
+export default PostsListBySubject;

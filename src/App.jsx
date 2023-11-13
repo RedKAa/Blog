@@ -33,6 +33,9 @@ import RejectedList from "./pages/rejected-list";
 import Published from "./pages/published";
 import Submitted from "./pages/submitted";
 import Rejected from "./pages/rejected";
+import Subjects from "./pages/subjects";
+import Subject from "./pages/subject";
+
 
 function App() {
   const mode = useDarkModeStore((state) => state.mode);
@@ -60,7 +63,9 @@ function App() {
               ></Route>
             </Route>
             <Route path="tags" element={<Tags />} />
-            <Route path="t/:tagId" element={<Tag />} />
+            <Route path="tags/:tagId" element={<Tag />} />
+            <Route path="subjects" element={<Subjects />} />
+            <Route path="subjects/:subjectId" element={<Subject />} />
             <Route path="search" element={<Search />} />
             <Route path="readinglist" element={<ReadingList />} />
             <Route path="forgot-password" element={<ForgotPassword />} />

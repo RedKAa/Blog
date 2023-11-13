@@ -1,18 +1,18 @@
 import React, { useRef, useCallback } from "react";
-import useTags from "../../../hooks/useTags";
+import useSubjects from "../../../hooks/useSubjects";
 import HashIcon from "components/HashIcon";
-import "./tags-filter.css";
+import "./subjects-filter.css";
 import { useAtom } from "jotai";
 import { pageNumberAtom } from "../../../store/page-number";
 import * as S from "./styles";
 import { Empty } from "antd";
 
-function TagsFilter({ q }) {
+function SubjectsFilter({ q }) {
   const [pageNumber, setPageNumber] = useAtom(pageNumberAtom);
-  const { loading, error, tags, hasMore } = useTags(pageNumber, q);
+  const { loading, error, subjects, hasMore } = useSubjects(pageNumber, q);
 
   const observer = useRef();
-  const lastTagElementRef = useCallback(
+  const lastSubjectElementRef = useCallback(
     (node) => {
       console.log("hello from last element");
       if (loading) return;
@@ -30,29 +30,29 @@ function TagsFilter({ q }) {
     [loading, hasMore, setPageNumber]
   );
   return (
-    <section className="tags-filter">
-      {tags.map((tag, index) => {
-        if (tags.length === index + 1) {
-          return <Tag key={tag.id} ref={lastTagElementRef} tag={tag} />;
+    <section className="subjects-filter">
+      {subjects.map((subject, index) => {
+        if (subjects.length === index + 1) {
+          return <Subject key={subject.id} ref={lastSubjectElementRef} subject={subject} />;
         } else {
-          return <Tag key={tag.id} tag={tag} />;
+          return <Subject key={subject.id} subject={subject} />;
         }
       })}
-      {tags.length === 0 && <Empty />}
+      {subjects.length === 0 && <Empty />}
     </section>
   );
 }
 
-const Tag = React.forwardRef(({ tag }, ref) => {
+const Subject = React.forwardRef(({ subject }, ref) => {
   return (
-    <S.Tag ref={ref}>
+    <S.Subject ref={ref}>
       <S.HashIconWrapper>
         <HashIcon />
       </S.HashIconWrapper>
       <S.Title level={4}>
-        <S.Link to={`/tags/${tag.id}`}>{tag.name} </S.Link>
+        <S.Link to={`/subjects/${subject.id}`}>{subject.name} </S.Link>
       </S.Title>
-    </S.Tag>
+    </S.Subject>
   );
 });
-export default TagsFilter;
+export default SubjectsFilter;

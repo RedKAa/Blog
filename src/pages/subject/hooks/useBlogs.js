@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import { getBlogs } from "../../../api/Blog";
-import { getUserInfo } from "../../../utils/utils";
 
-export default function useBlogs(pageNumber) {
+export default function useBlogs(pageNumber, subjectId) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(false);
-  const authUser = getUserInfo();
   useEffect(() => {
     setLoading(true);
     setError(false);
-    getBlogs(pageNumber, {postStatus:'Rejected', AuthorId: authUser.id, orderBy: 'updateAt-des', PageSize: 2})
+    getBlogs(pageNumber, { subjectId: subjectId,  postStatus: 'Publish', orderBy: 'updateAt-desc', PageSize: 2})
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
-        let { total,current,pageSize, data } = res;
+        let { total, pageSize, current, data } = res;
 
         setPosts((prevBlogs) => {
           return [...prevBlogs, ...data];
@@ -28,6 +26,6 @@ export default function useBlogs(pageNumber) {
         console.log(e);
         setError(true);
       });
-  }, [pageNumber]);
+  }, [pageNumber, subjectId]);
   return { loading, error, posts, hasMore };
 }

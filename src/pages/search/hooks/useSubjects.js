@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
-import { getTags } from "../../../api/Tag";
+import { getSubjects } from "../../../api/Subject";
 
-export default function useTags(pageNumber, q) {
+export default function useSubjects(pageNumber, q) {
   const [loading, setLoading] = useState(false);
-  const [tags, setTags] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
-    setTags([]);
+    setSubjects([]);
   }, [q]);
 
   useEffect(() => {
     setLoading(true);
     setError(null);
-    getTags({
+    getSubjects({
       page: pageNumber,
       name: q,
     })
       .then((res) => {
         let { total,current,pageSize, data } = res;
-        setTags((prevTags) => {
+        setSubjects((prevSubjects) => {
           return [
             ...new Map(
-              [...prevTags, ...data].map((tag) => [tag["id"], tag])
+              [...prevSubjects, ...data].map((subject) => [subject["id"], subject])
             ).values(),
           ];
         });
@@ -37,5 +37,5 @@ export default function useTags(pageNumber, q) {
       });
   }, [pageNumber, q]);
 
-  return { loading, tags, error, hasMore };
+  return { loading, subjects, error, hasMore };
 }

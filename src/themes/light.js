@@ -70,6 +70,13 @@ export const lightTheme = {
   tagPrefix: `rgba(${colors.grey[900]},0.6)`,
   tagPrefixHover: `rgb(${colors.grey[900]})`,
 
+  subjectColor: `rgb(${colors.grey[700]})`,
+  subjectColorHover: `rgb(${colors.grey[900]})`,
+  subjectBg: `rgba(${colors.grey[900]},0.05)`,
+  subjectBgHover: `rgba(${colors.grey[900]},0.05)`,
+  subjectPrefix: `rgba(${colors.grey[900]},0.6)`,
+  subjectPrefixHover: `rgb(${colors.grey[900]})`,
+
   btnGhostBg: "transparent",
   btnGhostBgHover: "rgba(0, 0, 0, 0.035)",
   btnGhostColor: `${colors.base[80]}`,

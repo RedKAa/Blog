@@ -154,7 +154,7 @@ const Post = () => {
               <S.Title level={2}>{post.title}</S.Title>
               <S.Tags>
                 {post.tags?.map((tag) => (
-                  <S.Tag to={`/t/${tag.id}`} key={tag.id} className="tag">
+                  <S.Tag to={`/tags/${tag.id}`} key={tag.id} className="tag">
                     <S.TagPrefix>#</S.TagPrefix>
                     {tag.name}
                   </S.Tag>

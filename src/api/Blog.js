@@ -173,3 +173,12 @@ export const allBlogByTag = (id) => {
     },
   });
 };
+
+export const allBlogBySubject = (id) => {
+  return request.get(`/posts`, {
+    params: {
+      SubjectId: id,
+      postStatus: 'Publish',
+    },
+  });
+};

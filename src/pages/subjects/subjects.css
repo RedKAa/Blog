@@ -1,0 +1,33 @@
+.subjects-page nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.subjects-page nav h1.ant-typography {
+  font-size: 30px;
+  line-height: 45px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subjects-page nav .input-search {
+  width: 200px;
+}
+
+@media (min-width: 768px) {
+  .subjects-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subjects-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+}

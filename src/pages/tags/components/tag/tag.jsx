@@ -5,7 +5,7 @@ import * as S from "./styles";
 const tag = forwardRef(({ tag }, ref) => {
   return (
     <S.Tag ref={ref} subjectStatus={tag.status}>
-      <S.TitleLink to={`/t/${tag.id}`}>
+      <S.TitleLink to={`/tags/${tag.id}`}>
         <S.Title level={3}>
           <S.Prefix>#</S.Prefix>
           {tag.name}

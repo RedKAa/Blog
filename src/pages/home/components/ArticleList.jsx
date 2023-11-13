@@ -1,13 +1,12 @@
 import { useCallback, useRef, useState } from "react";
 import useBlogs from "../hooks/useBlogs";
 import PreviewPost from "../../../components/preview-post/PreviewPost";
-import {  Avatar, List, Skeleton } from 'antd';
+import {  Avatar, Empty, List, Skeleton } from 'antd';
 import ListLoading from "../../../components/LoadingList";
 const ArticleList = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const { loading, error, posts, hasMore } = useBlogs(pageNumber);
   const observer = useRef();
-  const [loadske, setloadske] = useState(true);
 
   const lastElementPostRef = useCallback(
     (node) => {
@@ -20,14 +19,11 @@ const ArticleList = () => {
         }
       });
       if (node) observer.current.observe(node);
-
-      setloadske(loading);
     },
     [loading, hasMore]
   );
   return (
     <div className="substories">
-      <ListLoading loading={loadske} length={4}/>
       {posts.map((post, index) => {
         if (posts.length === index + 1) {
           return (
@@ -37,6 +33,8 @@ const ArticleList = () => {
           return <PreviewPost key={post.id} post={post} />;
         }
       })}
+      <ListLoading loading={loading} length={4}/>
+      {!loading && posts.length == 0 && <Empty />}
     </div>
   );
 };

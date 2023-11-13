@@ -11,13 +11,15 @@ export default function useBlogs(pageNumber) {
   useEffect(() => {
     setLoading(true);
     setError(false);
-    getBlogs(pageNumber, {postStatus:'Publish', approverId: authUser.id, orderBy: 'updateAt-des'})
+    getBlogs(pageNumber, {postStatus:'Publish', approverId: authUser.id, orderBy: 'updateAt-des', PageSize: 2})
       .then((res) => {
         if (Object.keys(res.data).length === 0) return;
         let { total,current,pageSize, data } = res;
 
+        const not_including_created_posts = data.filter( (post) => post.author.id !== authUser.id);
+
         setPosts((prevBlogs) => {
-          return [...prevBlogs, ...data];
+          return [...prevBlogs, ...not_including_created_posts];
         });
 
         const lastPage = Math.ceil(total / pageSize);

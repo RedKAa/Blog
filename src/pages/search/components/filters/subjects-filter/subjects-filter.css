@@ -1,0 +1,26 @@
+.subjects-filter .subject {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px #1717171a;
+}
+
+.subjects-filter .subject h4.ant-typography {
+  margin: 0;
+  font-weight: 700;
+}
+
+.subjects-filter .wrapper-hashicon {
+  background-color: red;
+  color: #f7df1e;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.subjects-filter .wrapper-hashicon svg {
+  vertical-align: bottom;
+}

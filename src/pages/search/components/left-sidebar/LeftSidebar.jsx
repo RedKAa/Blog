@@ -25,6 +25,13 @@ function LeftSidebar({ q, filters }) {
         <S.Text>People</S.Text>
       </S.NavLinkWrapper>
       <S.NavLinkWrapper
+        to={`?q=${q}&filters=subjects`}
+        className={`${filters === "subjects" ? "active" : ""}`}
+        onClick={clearNumberPage}
+      >
+        <S.Text>Subjects</S.Text>
+      </S.NavLinkWrapper>
+      <S.NavLinkWrapper
         to={`?q=${q}&filters=tags`}
         className={`${filters === "tags" ? "active" : ""}`}
         onClick={clearNumberPage}

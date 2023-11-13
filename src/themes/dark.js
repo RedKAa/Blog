@@ -75,6 +75,13 @@ export const DarkTheme = {
   tagPrefix: `rgba(${colors.grey[50]},0.6)`,
   tagPrefixHover: `rgb(${colors.grey[50]})`,
 
+  subjectColor: `rgb(${colors.grey[300]})`,
+  subjectColorHover: `rgb(${colors.grey[100]})`,
+  subjectBg: `rgba(${colors.grey[50]},0.05)`,
+  subjectBgHover: `rgba(${colors.grey[50]},0.05)`,
+  subjectPrefix: `rgba(${colors.grey[50]},0.6)`,
+  subjectPrefixHover: `rgb(${colors.grey[50]})`,
+
   btnGhostBg: "transparent",
   btnGhostBgHover: "rgba(255, 255, 255, 0.035)",
   btnGhostColor: `${colors.base[80]}`,

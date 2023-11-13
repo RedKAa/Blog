@@ -5,6 +5,8 @@ import LeftSidebar from "./components/left-sidebar/LeftSidebar";
 import PostsFilter from "./components/filters/posts-filter/PostsFilter";
 import UsersFilter from "./components/filters/users-filter/UsersFilter";
 import TagsFilter from "./components/filters/tags-filter/TagsFilter";
+import SubjectsFilter from "./components/filters/subjects-filter/SubjectsFilter";
+
 import styled from "styled-components";
 
 const Title = styled(Typography.Title)`
@@ -34,6 +36,7 @@ function Search() {
         <LeftSidebar q={q} filters={filters} />
         {filters === "posts" && <PostsFilter q={q} />}
         {filters === "people" && <UsersFilter q={q} />}
+        {filters === "subjects" && <SubjectsFilter q={q} />}
         {filters === "tags" && <TagsFilter q={q} />}
       </section>
     </Container>
