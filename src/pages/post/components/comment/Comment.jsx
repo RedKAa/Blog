@@ -31,7 +31,7 @@ const Comment = forwardRef(({ comment }, ref) => {
 
           <S.SeparateDot>·</S.SeparateDot>
           <S.PublishDate>
-          {moment(comment.createAt).format('HH:mm DD-MM-YYYY')}
+          {moment(comment.createAt).format('DD-MM-YYYY')}
           </S.PublishDate>
         </S.Header>
         <S.Description>{parse(`${comment.content}`)}</S.Description>
