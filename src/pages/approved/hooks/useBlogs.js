@@ -13,7 +13,7 @@ export default function useBlogs(pageNumber) {
     setError(false);
     getBlogs(pageNumber, {postStatus:'Publish', approverId: authUser.id, orderBy: 'updateAt-des', PageSize: 2})
       .then((res) => {
-        if (Object.keys(res.data).length === 0) return;
+        // if (Object.keys(res.data).length === 0) return;
         let { total,current,pageSize, data } = res;
 
         const not_including_created_posts = data.filter( (post) => post.author.id !== authUser.id);

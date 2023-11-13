@@ -33,7 +33,7 @@ function Subject() {
   return (
     <Container>
       <S.Subject>
-        <S.Header>
+        <S.Header subjectStatus={subject.status}>
           <S.Title level={2}>{subject.name}</S.Title>
         </S.Header>
         <S.Content>

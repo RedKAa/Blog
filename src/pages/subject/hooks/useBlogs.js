@@ -11,7 +11,7 @@ export default function useBlogs(pageNumber, subjectId) {
     setError(false);
     getBlogs(pageNumber, { subjectId: subjectId,  postStatus: 'Publish', orderBy: 'updateAt-desc', PageSize: 2})
       .then((res) => {
-        if (Object.keys(res.data).length === 0) return;
+        // if (Object.keys(res.data).length === 0) return;
         let { total, pageSize, current, data } = res;
 
         setPosts((prevBlogs) => {

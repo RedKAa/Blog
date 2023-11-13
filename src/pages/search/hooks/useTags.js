@@ -16,7 +16,7 @@ export default function useTags(pageNumber, q) {
     setError(false);
     getTags({ page: pageNumber, name: q })
       .then((res) => {
-        if (Object.keys(res.data).length === 0) return;
+        // if (Object.keys(res.data).length === 0) return;
         let { total, pageSize, current, data } = res;
         setTags((prevTags) => {
           return [...prevTags, ...data];

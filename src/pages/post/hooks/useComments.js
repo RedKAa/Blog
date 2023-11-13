@@ -18,7 +18,7 @@ export default function useComments(postId, pageNumber) {
     setError(false);
     getComments(postId, pageNumber)
       .then((res) => {
-        if (Object.keys(res.data).length === 0) return;
+        // if (Object.keys(res.data).length === 0) return;
         let { total,current,pageSize, data } = res;
 
         setComments((prevComments) => {

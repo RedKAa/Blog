@@ -8,6 +8,8 @@ const ArticlesList = ({ userId }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const { loading, error, posts, hasMore } = useBlogs(pageNumber, userId);
 
+  console.log(`Loading ${loading}`);
+
   const observer = useRef();
   const lastPostElementRef = useCallback(
     (node) => {

@@ -33,7 +33,7 @@ function Tag() {
   return (
     <Container>
       <S.Tag>
-        <S.Header>
+        <S.Header tagStatus={tag.status}>
           <S.Title level={2}>{tag.name}</S.Title>
         </S.Header>
         <S.Content>

@@ -11,21 +11,21 @@ export default function useBlogs(pageNumber, authorId) {
     setError(false);
     getBlogs(pageNumber, { AuthorId: authorId, postStatus: 'Publish', orderBy: 'createAt-des', PageSize: 2 })
       .then((res) => {
-        if (Object.keys(res.data).length === 0) return;
+        // if (Object.keys(res.data).length === 0) return;
         let { total, pageSize, current, data } = res;
-        setPosts((prevBlogs) => {
-          if(prevBlogs.length) {
-            if(prevBlogs[0].authorId != authorId) {
-              prevBlogs = [];
-            }
-          }
-          return [
-            ...new Map(
-              [...prevBlogs, ...data].map((blog) => [blog["id"], blog])
-            ).values(),
-          ];
-        });
 
+        setPosts((prevBlogs) => {
+
+          let tmp = prevBlogs.filter((p) => p.author.id === authorId);
+          // console.log('prevBlogs',tmp);
+          // return [
+          //   ...new Map(
+          //     [...tmp, ...data].map((blog) => [blog["id"], blog])
+          //   ).values(),
+          // ];
+          return [...tmp, ...data];
+        });
+        console.log('here',here);
         const lastPage = Math.ceil(total / pageSize);
         setHasMore(current < lastPage);
         setLoading(false);

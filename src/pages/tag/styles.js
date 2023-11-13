@@ -14,7 +14,7 @@ export const Tag = styled.div``;
 export const Header = styled.header`
   background-color: ${(props) => props.theme.cardBg};
   padding: 12px;
-  border-top: 16px solid ${(props) => getBorderColor(props.subjectStatus)};
+  border-top: 16px solid ${(props) => getBorderColor(props.tagStatus)};
   margin-bottom: 8px;
   margin-bottom: 24px;
   border-radius: 8px;

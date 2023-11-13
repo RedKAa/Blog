@@ -16,7 +16,7 @@ export default function useUsers(pageNumber, q) {
     setError(false);
     getUsers(pageNumber, { userName: q})
       .then((res) => {
-        if (Object.keys(res.data).length === 0) return;
+        // if (Object.keys(res.data).length === 0) return;
         let { total, pageSize, current, data } = res;
         setUsers((prevUsers) => {
           return [...prevUsers, ...data];

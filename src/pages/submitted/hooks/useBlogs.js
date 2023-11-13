@@ -13,7 +13,7 @@ export default function useBlogs(pageNumber) {
     setError(false);
     getBlogs(pageNumber, {postStatus:'Draft', AuthorId: authUser.id, orderBy: 'createAt-des', PageSize: 2})
       .then((res) => {
-        if (Object.keys(res.data).length === 0) return;
+        // if (Object.keys(res.data).length === 0) return;
         let { total,current,pageSize, data } = res;
 
         setPosts((prevBlogs) => {

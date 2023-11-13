@@ -11,7 +11,7 @@ const tag = forwardRef(({ tag }, ref) => {
           {tag.name}
         </S.Title>
       </S.TitleLink>
-      <S.TitleLink to={`/subject/${tag.subjectId}`}>
+      <S.TitleLink to={`/subjects/${tag.subjectId}`}>
         <S.Title level={1}>
           <S.Prefix>- </S.Prefix>
           {tag.subject.name}
