@@ -90,7 +90,7 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
   }, [post?.cover]);
 
   useEffect(() => {
-    getTags({Status: 'Active'}).then((res) => {
+    getTags().then((res) => {
       setTags(() => formatSelectOptions(res.data));
     });
   }, []);

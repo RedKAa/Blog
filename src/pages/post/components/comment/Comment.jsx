@@ -6,9 +6,29 @@ import * as S from "./styles";
 
 import parse from "html-react-parser";
 import moment from "moment";
-import { USER_DEFAULT_IMG } from "../../../../utils/utils";
+import { USER_DEFAULT_IMG, getUserInfo } from "../../../../utils/utils";
+import { Button } from "antd";
 
-const Comment = forwardRef(({ comment }, ref) => {
+const Comment = forwardRef(({ comment, onDelete }, ref) => {
+
+  const authUser = getUserInfo();
+
+  const handleDeleteComment = () => {
+    if(comment) {
+      setStatus("pending");
+      createComment({
+        postId,
+        content: newComment,
+        commenterId: authUser.id
+      })
+        .then((res) => {
+            setComments((prevComments) => [{...res, commenter:authUser}, ...prevComments]);
+            setNewComment("");
+            setStatus("resolved");
+        })
+    }
+  };
+
   return (
     <S.Comment ref={ref}>
       <S.ImageLink to={`/user/${comment.commenter?.id}`}>
@@ -33,6 +53,11 @@ const Comment = forwardRef(({ comment }, ref) => {
           <S.PublishDate>
           {moment(comment.createAt).format('DD-MM-YYYY')}
           </S.PublishDate>
+
+          {(authUser.id === comment.commenter.id) && <Button type="link" danger style={{position: 'absolute', right:'0px', top:'0px'}} onClick={() => onDelete(comment.id)}>
+            Delete
+          </Button>}
+
         </S.Header>
         <S.Description>{parse(`${comment.content}`)}</S.Description>
       </S.Content>

@@ -1,11 +1,24 @@
 import { useCallback, useRef, useState } from "react";
 import useComments from "../hooks/useComments";
 import Comment from "./comment/Comment";
+import { removeComment } from "../../../api/Comment";
+import { useNavigate } from "react-router";
 
 const CommentsList = ({ postId }) => {
   const [pageNumber, setPageNumber] = useState(1);
-  const { comments, loading, hasMore, error } = useComments(postId, pageNumber);
+  const { comments, loading, hasMore } = useComments(pageNumber, {postId, status: 'Active', orderBy: 'createAt-asc'});
   const observer = useRef();
+  const navigate = useNavigate();
+
+  const onDeleteComment = (id) => {
+    removeComment(id)
+      .then(() => {
+        navigate(0);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
 
   // console.log(comments);
@@ -33,10 +46,11 @@ const CommentsList = ({ postId }) => {
               key={comment.id}
               ref={lastElementCommentRef}
               comment={comment}
+              onDelete={onDeleteComment}
             />
           );
         } else {
-          return <Comment key={comment.id} comment={comment} />;
+          return <Comment key={comment.id} comment={comment} onDelete={onDeleteComment}/>;
         }
       })}
     </div>

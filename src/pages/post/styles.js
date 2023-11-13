@@ -11,6 +11,19 @@ export const Layout = styled.div`
   @media ${device.md} {
     grid-template-columns: 4rem minmax(0, 7fr) 3fr;
   }
+
+  .quill-editor iframe {
+    pointer-events: none;
+  }
+  .ql-editor .ql-video {
+    display: block;
+    max-width: 100%;
+    width: 1200px;
+    height: 500px;
+  }
+
+
+
 `;
 
 export const Content = styled.div``;

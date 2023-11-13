@@ -22,7 +22,7 @@ const NewComment = ({ postId }) => {
         commenterId: authUser.id
       })
         .then((res) => {
-            setComments((prevComments) => [res, ...prevComments]);
+            setComments((prevComments) => [{...res, commenter:authUser}, ...prevComments]);
             setNewComment("");
             setStatus("resolved");
         })

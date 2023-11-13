@@ -20,11 +20,12 @@ export default function useComments(postId, pageNumber) {
       .then((res) => {
         // if (Object.keys(res.data).length === 0) return;
         let { total,current,pageSize, data } = res;
+        let tmp = data.filter((c) => c.status === 'Active');
 
         setComments((prevComments) => {
           return [
             ...new Map(
-              [...prevComments, ...data].map((comment) => [
+              [...prevComments, ...tmp].map((comment) => [
                 comment["id"],
                 comment,
               ])

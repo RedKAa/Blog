@@ -46,6 +46,7 @@ export const Content = styled.div`
 export const Header = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 `;
 
 export const Button = styled(ButtonAnt)`

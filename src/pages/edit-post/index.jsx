@@ -4,6 +4,7 @@ import CustomCreatePost from "../../components/custom-create-post";
 import { Provider } from "jotai";
 import { contentFieldAtom } from "../../components/custom-create-post/store/content-field";
 import { updateBlog, getPostBySlug } from "../../api/Blog";
+import { getUserInfo } from "../../utils/utils";
 
 const EditPost = () => {
   const { slug } = useParams();
@@ -12,6 +13,8 @@ const EditPost = () => {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const authUser = getUserInfo();
+
 
   useEffect(() => {
     setPostStatus("pending");
@@ -33,6 +36,9 @@ const EditPost = () => {
     updateBlog(post.id, values)
       .then((res) => {
         setStatus("resolved");
+      })
+      .then(() => {
+        navigate(`/user/${authUser.id}`);
       })
       .catch((e) => {
         setStatus("rejected");

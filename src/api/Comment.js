@@ -18,11 +18,11 @@ const URL = import.meta.env.VITE_URL;
 //   }
 // };
 
-export const getComments = (postId, page) => {
+export const getComments = (page, filter) => {
   return request.get('/comments', {
     params: {
-      postId,
-      page
+      page,
+      ...filter
     },
     useCache: true,
   });
@@ -36,6 +36,9 @@ export const createComment = (data) => {
   });
 }
 
+export const removeComment = (id) => {
+  return request.delete(`/comments/${id}`);
+}
 
 // export const createComment = async (data) => {
 //   const { token } = JSON.parse(localStorage.getItem("current_user"));
