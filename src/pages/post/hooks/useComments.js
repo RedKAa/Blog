@@ -20,7 +20,10 @@ export default function useComments(postId, pageNumber) {
       .then((res) => {
         // if (Object.keys(res.data).length === 0) return;
         let { total,current,pageSize, data } = res;
-        let tmp = data.filter((c) => c.status === 'Active');
+        let tmp = [];
+        if(data && data.length) {
+          tmp = data.filter((c) => c.status === 'Active');
+        }
 
         setComments((prevComments) => {
           return [
