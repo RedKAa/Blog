@@ -22,6 +22,7 @@ export const getComments = (page, filter) => {
   return request.get('/comments', {
     params: {
       page,
+      status:'Active',
       ...filter
     },
     useCache: true,
