@@ -26,6 +26,7 @@ export const getBlogs = (p = 1, filters) => {
   return request.get('/posts', {
     params: {
       page: p,
+      status: 'Active',
       ...filters
     },
     useCache: true,

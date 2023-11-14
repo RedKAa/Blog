@@ -43,8 +43,8 @@ const validFormData = (formData) => {
       message.error('Please select tag!');
       return false;
     }
-    if(!formData.content){
-      message.error('Invalid post content!');
+    if(!formData.content || formData.content.length < 40){
+      message.error('Invalid post content! (min: 40 characters)');
       return false;
     }
     if(!formData.postType){
