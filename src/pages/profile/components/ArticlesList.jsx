@@ -16,6 +16,7 @@ const ArticlesList = ({ userId }) => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
+        console.log('Loading new',hasMore)
         if (entries[0].isIntersecting && hasMore) {
           setPageNumber((prevPageNumber) => prevPageNumber + 1);
         }

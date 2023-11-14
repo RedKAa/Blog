@@ -36,7 +36,8 @@ const UserPreview = ({ user }) => {
         <S.Title level={2}>
           {user.userName}
         </S.Title>
-        <S.Bio>{user.intro}</S.Bio>
+        <S.Bio>{user.role}</S.Bio>
+        <S.Bio>{user.bio}</S.Bio>
         <S.Date>
           Joined on
           <time dateTime={user.registeredAt}>

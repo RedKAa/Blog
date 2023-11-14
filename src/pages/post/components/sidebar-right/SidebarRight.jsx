@@ -23,6 +23,8 @@ const SidebarRight = ({ author }) => {
               </S.SubTitle>
             </S.Link>
           </S.Header>
+          <S.Description>{author?.role}</S.Description>
+
           <S.Description>{author?.bio}</S.Description>
           <S.Details>
             <ul>

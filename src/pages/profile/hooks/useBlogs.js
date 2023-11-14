@@ -12,20 +12,13 @@ export default function useBlogs(pageNumber, authorId) {
     getBlogs(pageNumber, { AuthorId: authorId, postStatus: 'Publish', orderBy: 'createAt-des', PageSize: 2 })
       .then((res) => {
         // if (Object.keys(res.data).length === 0) return;
-        let { total, pageSize, current, data } = res;
 
+        let { total, pageSize, current, data } = res;
         setPosts((prevBlogs) => {
 
-          let tmp = prevBlogs.filter((p) => p.author.id === authorId);
-          // console.log('prevBlogs',tmp);
-          // return [
-          //   ...new Map(
-          //     [...tmp, ...data].map((blog) => [blog["id"], blog])
-          //   ).values(),
-          // ];
+          let tmp = prevBlogs?.filter((p) => p.author.id === authorId);
           return [...tmp, ...data];
         });
-        console.log('here',here);
         const lastPage = Math.ceil(total / pageSize);
         setHasMore(current < lastPage);
         setLoading(false);
