@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Button, Card, Col, Row, Tooltip, Typography } from "antd";
+import { Button, Card, Col, Row, Space, Tooltip, Typography } from "antd";
 
 import Container from "../../components/utils/Container";
 // import homeIcon from "../../public/img/home.svg";
@@ -76,27 +76,27 @@ const TopAuthors = () => {
     <S.ImageList>
       {data?.map((student, index) => (
         <Tooltip
-        title={hoveredStudent === student ? student.userName : null}
-        key={index}
-        placement="left"
-      >
-        <Link to={`/user/${student.id}`}
+          title={hoveredStudent === student ? student.userName : null}
           key={index}
-          onMouseOver={() => setHoveredStudent(student)}
-          onMouseOut={() => setHoveredStudent(null)}>
-          <S.ImageTeacher
-            src={`${(student.avatarLink && student.avatarLink.length > 20)
-              ? `${student.avatarLink}`
-              : USER_DEFAULT_IMG}`}
-            alt="said"
-            width="100"
-            height="100"
-          />
-        </Link>
-      </Tooltip>
-    ))}
-  </S.ImageList>
-);
+          placement="left"
+        >
+          <Link to={`/user/${student.id}`}
+            key={index}
+            onMouseOver={() => setHoveredStudent(student)}
+            onMouseOut={() => setHoveredStudent(null)}>
+            <S.ImageTeacher
+              src={`${(student.avatarLink && student.avatarLink.length > 20)
+                ? `${student.avatarLink}`
+                : USER_DEFAULT_IMG}`}
+              alt="said"
+              width="100"
+              height="100"
+            />
+          </Link>
+        </Tooltip>
+      ))}
+    </S.ImageList>
+  );
 };
 
 const TopTeachers = () => {
@@ -195,44 +195,46 @@ const Home = () => {
           </nav>
         </HomeSidebar>
         <HomeMain>
-          <header style={{ marginBottom: "12px" }}>
-            <nav>
-              <ul>
-                <li>
-                  <SecondaryNavLink $active={true} to="/">
-                    Latest
-                  </SecondaryNavLink>
-                </li>
-                <li>
-                  <SecondaryNavLink $active={false} to="/trending">
-                    Trending
-                  </SecondaryNavLink>
-                </li>
-                {/* <li>
+          <Space direction="vertical" size="small" style={{ display: 'flex' }}>
+            <header style={{ marginBottom: "12px" }}>
+              <nav>
+                <ul>
+                  <li>
+                    <SecondaryNavLink $active={true} to="/">
+                      Latest
+                    </SecondaryNavLink>
+                  </li>
+                  <li>
+                    <SecondaryNavLink $active={false} to="/trending">
+                      Trending
+                    </SecondaryNavLink>
+                  </li>
+                  {/* <li>
                   <SecondaryNavLink $active={false} to="/top">
                     Top
                   </SecondaryNavLink>
                 </li> */}
-              </ul>
-            </nav>
-          </header>
-          <Row gutter={[16, 16]}>
-            <Col span={12}>
-              <Card title="Top 3 Teacher" size="small" style={{ height: '170px' }}>
-                <S.CenteredContainer>
-                  <TopTeachers />
-                </S.CenteredContainer>
-              </Card>
-            </Col>
-            <Col span={12}>
-              <Card title="Top 3 Student" size="small" style={{ height: '170px' }}>
-                <S.CenteredContainer>
-                  <TopAuthors />
-                </S.CenteredContainer>
-              </Card>
-            </Col>
-          </Row>
-          <ArticleList />
+                </ul>
+              </nav>
+            </header>
+            <Row gutter={[16, 16]}>
+              <Col span={12}>
+                <Card title="Top 3 Teacher" size="small" style={{ height: '170px' }}>
+                  <S.CenteredContainer>
+                    <TopTeachers />
+                  </S.CenteredContainer>
+                </Card>
+              </Col>
+              <Col span={12}>
+                <Card title="Top 3 Student" size="small" style={{ height: '170px' }}>
+                  <S.CenteredContainer>
+                    <TopAuthors />
+                  </S.CenteredContainer>
+                </Card>
+              </Col>
+            </Row>
+            <ArticleList />
+          </Space>
         </HomeMain>
       </HomeContainer>
     </Container>
