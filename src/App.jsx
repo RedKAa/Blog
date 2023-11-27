@@ -35,6 +35,7 @@ import Submitted from "./pages/submitted";
 import Rejected from "./pages/rejected";
 import Subjects from "./pages/subjects";
 import Subject from "./pages/subject";
+import TrendingPost from "./pages/trending_post";
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
             <Route path="reset-password" element={<ResetPassword />} />
             <Route path="videos" element={<Video />} />
             <Route path="published" element={<Published />} />
+            <Route path="trending" element={<TrendingPost />} />
           </Route>
 
           <Route element={<ProtectedRoute acceptedRoles={['Teacher']} />}>

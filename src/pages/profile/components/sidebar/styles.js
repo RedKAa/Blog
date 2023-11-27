@@ -22,7 +22,26 @@ export const Item = styled.div`
   }
 `;
 
+export const Title = styled.div`
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+
+  .anticon {
+    font-size: 20px;
+    color: ${(props) => props.theme.base[50]};
+  }
+`;
+
 export const Text = styled(Typography.Text)`
   font-size: 16px;
   color: ${(props) => props.theme.cardSecondaryColor};
+`;
+
+export const Image = styled.img`
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  margin-left: 30px;
+  margin-top: 60px;
 `;

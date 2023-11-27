@@ -37,6 +37,18 @@ export const getUsers = (p, filters) => {
   });
 };
 
+export const getHotAuthors = () => {
+  return request.get('/users/hot/author', {
+    useCache: true,
+  });
+};
+
+export const getHotTeachers = (p, filters) => {
+  return request.get('/users/hot/teacher', {
+    useCache: true,
+  });
+};
+
 export async function getUser(id) {
   try {
     const res = await axios.get(`${URL}/users/${id}`);

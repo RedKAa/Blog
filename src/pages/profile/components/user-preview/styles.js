@@ -23,10 +23,10 @@ export const Button = styled(ButtonAnt)`
 
 export const Image = styled.img`
   border: solid 8px #3063b0;
+  border-radius: 100%;
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 100%;
   object-fit: cover;
 `;
 

@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Button, Card, Col, Row, Tooltip, Typography } from "antd";
-
+import { Button, Card, Col, Image, Row, Space, Typography } from "antd";
 import Container from "../../components/utils/Container";
 // import homeIcon from "../../public/img/home.svg";
 import styled from "styled-components";
@@ -8,17 +7,18 @@ import styled from "styled-components";
 // import tagIcon from "../../public/img/tag.svg";
 import ArticleList from "./components/ArticleList";
 import { Link } from "react-router-dom";
-import { USER_DEFAULT_IMG, getUserInfo } from "../../utils/utils";
 import { getHotAuthors, getHotTeachers } from "../../api/User";
+import { USER_DEFAULT_IMG } from "../../utils/utils";
 import * as S from "./components/styles";
+import { Tooltip } from 'antd';
 
-const HomeContainer = styled.div`
+const TrendingContainer = styled.div`
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
   column-gap: 20px;
 `;
 
-const HomeSidebar = styled.aside``;
+const TrendingSidebar = styled.aside``;
 const SidebarLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -38,7 +38,7 @@ const SidebarLink = styled(Link)`
   }
 `;
 
-const HomeMain = styled.main`
+const TrendingMain = styled.main`
   header nav ul {
     display: flex;
     gap: 16px;
@@ -57,6 +57,7 @@ const SecondaryNavLink = styled(Link)`
     background-color: ${(props) => props.theme.base.inverted};
   }
 `;
+
 const TopAuthors = () => {
   const [data, setData] = useState([]);
   const [hoveredStudent, setHoveredStudent] = useState(null);
@@ -142,13 +143,11 @@ const TopTeachers = () => {
   );
 };
 
-const Home = () => {
-  const authUser = getUserInfo();
-  const role = authUser?.role;
+const TrendingPost = () => {
   return (
     <Container>
-      <HomeContainer>
-        <HomeSidebar>
+      <TrendingContainer>
+        <TrendingSidebar>
           <nav>
             <ul>
               <li>
@@ -160,7 +159,7 @@ const Home = () => {
                 </SidebarLink>
               </li>
               <li>
-                <SidebarLink to="readinglist">
+                <SidebarLink to="/readinglist">
                   <span>
                     {/* <img src={readingListIcon} alt="reading list icon" /> */}
                   </span>
@@ -168,7 +167,7 @@ const Home = () => {
                 </SidebarLink>
               </li>
               <li>
-                <SidebarLink to="videos">
+                <SidebarLink to="/videos">
                   <span>
                     {/* <img src={tagIcon} alt="tags icon" /> */}
                   </span>
@@ -176,7 +175,7 @@ const Home = () => {
                 </SidebarLink>
               </li>
               <li>
-                <SidebarLink to="subjects">
+                <SidebarLink to="/subjects">
                   <span>
                     {/* <img src={tagIcon} alt="tags icon" /> */}
                   </span>
@@ -184,7 +183,7 @@ const Home = () => {
                 </SidebarLink>
               </li>
               <li>
-                <SidebarLink to="tags">
+                <SidebarLink to="/tags">
                   <span>
                     {/* <img src={tagIcon} alt="tags icon" /> */}
                   </span>
@@ -193,50 +192,48 @@ const Home = () => {
               </li>
             </ul>
           </nav>
-        </HomeSidebar>
-        <HomeMain>
-          <header style={{ marginBottom: "12px" }}>
-            <nav>
-              <ul>
-                <li>
-                  <SecondaryNavLink $active={true} to="/">
-                    Latest
-                  </SecondaryNavLink>
-                </li>
-                <li>
-                  <SecondaryNavLink $active={false} to="/trending">
-                    Trending
-                  </SecondaryNavLink>
-                </li>
-                {/* <li>
-                  <SecondaryNavLink $active={false} to="/top">
-                    Top
-                  </SecondaryNavLink>
-                </li> */}
-              </ul>
-            </nav>
-          </header>
-          <Row gutter={[16, 16]}>
-            <Col span={12}>
-              <Card title="Top 3 Teacher" size="small" style={{ height: '170px' }}>
-                <S.CenteredContainer>
-                  <TopTeachers />
-                </S.CenteredContainer>
-              </Card>
-            </Col>
-            <Col span={12}>
-              <Card title="Top 3 Student" size="small" style={{ height: '170px' }}>
-                <S.CenteredContainer>
-                  <TopAuthors />
-                </S.CenteredContainer>
-              </Card>
-            </Col>
-          </Row>
-          <ArticleList />
-        </HomeMain>
-      </HomeContainer>
+        </TrendingSidebar>
+        <TrendingMain>
+          <Space direction="vertical" size="small" style={{ display: 'flex' }}>
+            <header style={{ marginBottom: "12px" }}>
+              <nav>
+                <ul>
+                  <li>
+                    <SecondaryNavLink $active={false} to="/">
+                      Latest
+                    </SecondaryNavLink>
+                  </li>
+                  <li>
+                    <SecondaryNavLink $active={true} to="/trending">
+                      Trending
+                    </SecondaryNavLink>
+                  </li>
+                </ul>
+              </nav>
+            </header>
+            <Row gutter={[16, 16]}>
+              <Col span={12}>
+                <Card title="Top 3 Teacher" size="small" style={{ height: '170px' }}>
+                  <S.CenteredContainer>
+                    <TopTeachers />
+                  </S.CenteredContainer>
+                </Card>
+              </Col>
+              <Col span={12}>
+                <Card title="Top 3 Student" size="small" style={{ height: '170px' }}>
+                  <S.CenteredContainer>
+                    <TopAuthors />
+                  </S.CenteredContainer>
+                </Card>
+              </Col>
+            </Row>
+
+            <ArticleList />
+          </Space>
+        </TrendingMain>
+      </TrendingContainer>
     </Container>
   );
 };
 
-export default Home;
+export default TrendingPost;
