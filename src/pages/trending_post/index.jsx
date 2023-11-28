@@ -85,7 +85,7 @@ const TopAuthors = () => {
           key={index}
           onMouseOver={() => setHoveredStudent(student)}
           onMouseOut={() => setHoveredStudent(null)}>
-          <S.ImageTeacher
+          <S.ImageStudent
             src={`${(student.avatarLink && student.avatarLink.length > 20)
               ? `${student.avatarLink}`
               : USER_DEFAULT_IMG}`}
