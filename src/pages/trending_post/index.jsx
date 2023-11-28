@@ -65,7 +65,7 @@ const TopAuthors = () => {
     getHotAuthors()
       .then((res) => {
         setData(() => {
-          return res;
+          return res?.slice(0,3);
         });
       })
       .catch((e) => {
@@ -108,7 +108,7 @@ const TopTeachers = () => {
     getHotTeachers()
       .then((res) => {
         setData(() => {
-          return res;
+          return res?.slice(0,3);
         });
       })
       .catch((e) => {
@@ -213,14 +213,14 @@ const TrendingPost = () => {
             </header>
             <Row gutter={[16, 16]}>
               <Col span={12}>
-                <Card title="Top 3 Teacher" size="small" style={{ height: '170px' }}>
+                <Card title="Top Teachers" size="small" style={{ height: '170px' }}>
                   <S.CenteredContainer>
                     <TopTeachers />
                   </S.CenteredContainer>
                 </Card>
               </Col>
               <Col span={12}>
-                <Card title="Top 3 Student" size="small" style={{ height: '170px' }}>
+                <Card title="Top Students" size="small" style={{ height: '170px' }}>
                   <S.CenteredContainer>
                     <TopAuthors />
                   </S.CenteredContainer>

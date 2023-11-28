@@ -83,7 +83,7 @@ function Register() {
             )}
             <Card className="register__card">
               <Title className="register__title">
-                Welcome to FPTBlog Community
+                Welcome to SEBlog Community
               </Title>
               <Paragraph
                 style={{

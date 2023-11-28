@@ -189,7 +189,7 @@ function NavBar() {
       <Container>
         <S.NavbarContainer>
           <S.LeftNavbar>
-            <S.Logo to="/">FPTBlog</S.Logo>
+            <S.Logo to="/">SEBlog</S.Logo>
             <S.SearchWrapper>
               <S.Search placeholder="Search" size="large" onSearch={onSearch} />
             </S.SearchWrapper>
@@ -202,7 +202,7 @@ function NavBar() {
           </S.RightNavbar>
         </S.NavbarContainer>
         <S.DrawerWrapper
-          title="FPTBlog"
+          title="SEBlog"
           placement="right"
           onClose={() => setOpenDrawer(false)}
           open={openDrawer}

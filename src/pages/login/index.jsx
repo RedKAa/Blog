@@ -92,7 +92,7 @@ function Login() {
           <Col md={14}>
             <Card className="login__card">
               <Title className="login__title">
-                Welcome to FPTBlog Community
+                Welcome to SEBlog Community
               </Title>
               <Paragraph
                 style={{

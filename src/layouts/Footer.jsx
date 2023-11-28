@@ -56,7 +56,7 @@ const Footer = () => {
   return (
     <FooterWrapper>
       <FooterDescription>
-        <FooterBlogLink to="/">FPTBLOG Community 👩‍💻👨‍💻</FooterBlogLink> — A
+        <FooterBlogLink to="/">SEBLOG Community 👩‍💻👨‍💻</FooterBlogLink> — A
         constructive and inclusive blog for students. With
         you every step of your journey.
       </FooterDescription>

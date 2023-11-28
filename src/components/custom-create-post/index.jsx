@@ -139,7 +139,7 @@ const CustomCreatePost = ({ post, handleFetch, useStatus, useError }) => {
       <Container>
         <S.Nav>
           <S.LeftNav>
-            <S.Logo>FPTBlog</S.Logo>
+            <S.Logo>SEBlog</S.Logo>
             <S.ActionText>{post ? "Edit Post" : "Create Post"}</S.ActionText>
           </S.LeftNav>
           <ButtonConfirm />

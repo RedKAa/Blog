@@ -1,4 +1,4 @@
-# **FPTBlog Frontend**
+# **SEBlog Frontend**
 
 ### **Built With**
 

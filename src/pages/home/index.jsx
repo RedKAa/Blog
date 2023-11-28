@@ -64,7 +64,7 @@ const TopAuthors = () => {
     getHotAuthors()
       .then((res) => {
         setData(() => {
-          return res;
+          return res?.slice(0,3);
         });
       })
       .catch((e) => {
@@ -107,7 +107,7 @@ const TopTeachers = () => {
     getHotTeachers()
       .then((res) => {
         setData(() => {
-          return res;
+          return res?.slice(0,3);
         });
       })
       .catch((e) => {
@@ -217,7 +217,7 @@ const Home = () => {
                 </ul>
               </nav>
             </header>
-            <Row gutter={[16, 16]}>
+            {/* <Row gutter={[16, 16]}>
               <Col span={12}>
                 <Card title="Top 3 Teacher" size="small" style={{ height: '170px' }}>
                   <S.CenteredContainer>
@@ -232,7 +232,7 @@ const Home = () => {
                   </S.CenteredContainer>
                 </Card>
               </Col>
-            </Row>
+            </Row> */}
             <ArticleList />
           </Space>
         </HomeMain>
