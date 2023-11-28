@@ -205,7 +205,7 @@ const PreviewPost = React.forwardRef(({ post }, ref) => {
               </Reaction>
               <Reaction>
                 <MessageOutlined style={{ marginRight: "8px" }} />
-                <ReactionText> {post.comments?.length || 0} comments</ReactionText>
+                <ReactionText> {post.comments?.filter(c => c.commentType != "RejectReason").length || 0} comments</ReactionText>
               </Reaction>
             </PreviewReactions>
             <PreviewSave>
