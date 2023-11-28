@@ -4,9 +4,10 @@ import Comment from "./comment/Comment";
 import { removeComment } from "../../../api/Comment";
 import { useNavigate } from "react-router";
 
-const CommentsList = ({ postId }) => {
+const CommentsList = ({ postId, commentType }) => {
+  // console.log('commentType',commentType)
   const [pageNumber, setPageNumber] = useState(1);
-  const { comments, loading, hasMore } = useComments(pageNumber, {postId, status: 'Active', orderBy: 'createAt-asc'});
+  const { comments, loading, hasMore } = useComments(pageNumber, {postId, status: 'Active', orderBy: (commentType == 'Comment' ? 'createAt-asc' : 'createAt-des') , commentType: commentType});
   const observer = useRef();
   const navigate = useNavigate();
 

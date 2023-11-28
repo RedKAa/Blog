@@ -1,19 +1,19 @@
 import { format } from "date-fns";
-
+import React from 'react';
 import * as S from "./styles.js";
 import { USER_DEFAULT_IMG } from "../../../../utils/utils.js";
 
 const SidebarRight = ({ author }) => {
   return (
     <S.SidebarRight>
-      <S.SidebarRightInner>
+      <S.Space>
         <S.Card>
           <S.Header>
             <S.Link to={`/user/${author?.id}`}>
               <S.WrapperImage>
                 <S.Image
-                  src={`${(author.avatarLink && author.avatarLink.length > 20)
-                    ? `${author.avatarLink}`
+                  src={`${(author?.avatarLink && author?.avatarLink.length > 20)
+                    ? `${author?.avatarLink}`
                     : USER_DEFAULT_IMG}`}
                   alt="author image"
                 />
@@ -24,7 +24,6 @@ const SidebarRight = ({ author }) => {
             </S.Link>
           </S.Header>
           <S.Description>{author?.role}</S.Description>
-
           <S.Description>{author?.bio}</S.Description>
           <S.Details>
             <ul>
@@ -42,9 +41,13 @@ const SidebarRight = ({ author }) => {
             </ul>
           </S.Details>
         </S.Card>
-      </S.SidebarRightInner>
+      </S.Space>
+      <S.Space>
+          <S.Card>
+            <S.Key>Bài viết chưa được duyệt</S.Key>
+          </S.Card>
+        </S.Space>      
     </S.SidebarRight>
   );
 };
-
 export default SidebarRight;

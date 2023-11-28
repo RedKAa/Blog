@@ -9,12 +9,26 @@ export const SidebarRightInner = styled.div`
   top: 70px;
 `;
 
+export const Space = styled.div`
+  padding-bottom: 20px;
+`;
+
 export const Card = styled.div`
   display: grid;
   gap: 16px;
   padding: 16px;
   background-color: ${(props) => props.theme.cardSecondaryBg};
   border-top: 32px solid #726fbf;
+  box-shadow: 0 0 0 1px ${(props) => props.theme.cardSecondaryBorder};
+  border-radius: 8px;
+`;
+
+export const CardT = styled.div`
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  background-color: ${(props) => props.theme.cardSecondaryBg};
+  border-top: 32px solid #389e0d;
   box-shadow: 0 0 0 1px ${(props) => props.theme.cardSecondaryBorder};
   border-radius: 8px;
 `;

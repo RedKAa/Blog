@@ -33,16 +33,19 @@ const EditPost = () => {
   }, [navigate, postStatus]);
 
   const handleFetch = (values) => {
-    updateBlog(post.id, values)
-      .then((res) => {
-        setStatus("resolved");
-      })
-      .then(() => {
-        navigate(`/user/${authUser.id}`);
-      })
-      .catch((e) => {
-        setStatus("rejected");
-      });
+    if (postStatus === "Rejected") {
+      setPostStatus("Draft")
+    }
+      updateBlog(post.id, values)
+        .then((res) => {
+          setStatus("resolved");
+        })
+        .then(() => {
+          navigate(`/user/${authUser.id}`);
+        })
+        .catch((e) => {
+          setStatus("rejected");
+        });
   };
   if (postStatus === "resolved") {
     return (
