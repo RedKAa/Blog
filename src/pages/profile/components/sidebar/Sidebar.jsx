@@ -31,40 +31,42 @@ const SideBar = () => {
   return (
     <S.Sidebar>
       <Space direction="vertical" size="small" style={{ display: 'flex' }}>
+        {user.rank && user.rank.imgLink && user.rank.imgLink.length > 20 && (
+          <Card title="Badge" size="small">
+            <S.Item>
+              <S.Image
+                src={`${(user.rank && user.rank.imgLink && user.rank.imgLink.length > 20)
+                  ? `${user.rank.imgLink}`
+                  : 'Nothing'}`}
+                width="70"
+                height="70"
+                alt="said"
+                onClick={showModal}
+              />
+              <Modal
+                title={
+                  <div>
+                    <Avatar
+                      src={
+                        user.rank && user.rank.imgLink && user.rank.imgLink.length > 20
+                          ? user.rank.imgLink
+                          : 'Nothing'
+                      }
+                      size={32}
+                    />
+                    {user?.rank?.name || 'Error display'}
+                  </div>
+                }
+                visible={isModalVisible}
+                onCancel={handleCancel}
+                footer={null}
+              >
+                <p>{user?.rank?.description || 'Error display'}</p>
+              </Modal>
+            </S.Item>
+          </Card>
+        )}
 
-        <Card title="Badge" size="small">
-          <S.Item>
-            <S.Image
-              src={`${(user.rank && user.rank.imgLink && user.rank.imgLink.length > 20)
-                ? `${user.rank.imgLink}`
-                : 'Nothing'}`}
-              width="70"
-              height="70"
-              alt="said"
-              onClick={showModal}
-            />
-            <Modal
-              title={
-                <div>
-                  <Avatar
-                    src={
-                      user.rank && user.rank.imgLink && user.rank.imgLink.length > 20
-                        ? user.rank.imgLink
-                        : 'Nothing'
-                    }
-                    size={32}
-                  />
-                  {user?.rank?.name || 'Error display'}
-                </div>
-              }
-              visible={isModalVisible}
-              onCancel={handleCancel}
-              footer={null}
-            >
-              <p>{user?.rank?.description || 'Error display'}</p>
-            </Modal>
-          </S.Item>
-        </Card>
 
         <S.Card>
           <S.Item>
