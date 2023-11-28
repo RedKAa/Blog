@@ -17,7 +17,7 @@ const SideBar = () => {
     totalposts = user.createPosts.length;
   }
   if (user.comments) {
-    totalcomments = user.comments.length;
+    totalcomments = user.comments.filter(c => c.status === "Active").length;
   }
   const [isModalVisible, setIsModalVisible] = useState(false);
 
